@@ -239,9 +239,11 @@ public class Application extends JFrame implements ActionListener {
                         (buttons[5].getText()!="") &&
                         (buttons[6].getText()!="") &&
                         (buttons[7].getText()!="") &&
-                        (buttons[8].getText()!=""))
+                        (buttons[8].getText()!="") &&
+                        (check()==false))
+                               
                      {
-                         if(check()==false)
+                         
                     itsdraw();
                 }
         }
