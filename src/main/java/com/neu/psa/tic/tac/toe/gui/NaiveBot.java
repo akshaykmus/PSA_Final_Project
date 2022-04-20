@@ -16,7 +16,7 @@ import javax.swing.JButton;
  *
  * @author vidhi
  */
-public class NaiveBotPanel extends javax.swing.JPanel implements ActionListener{
+public class NaiveBot extends javax.swing.JPanel implements ActionListener{
 
     
     JButton[] buttons = new JButton[9];
@@ -25,7 +25,7 @@ public class NaiveBotPanel extends javax.swing.JPanel implements ActionListener{
     /**
      * Creates new form NaiveBotPanel
      */
-    public NaiveBotPanel() {
+    public NaiveBot() {
         initComponents();
         createGridButtons();
 

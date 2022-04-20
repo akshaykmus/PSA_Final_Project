@@ -87,6 +87,11 @@ public class Application extends javax.swing.JFrame {
         buttonPanel.add(btnEasy, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, 32));
 
         btnHard.setText("Hard");
+        btnHard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHardActionPerformed(evt);
+            }
+        });
         buttonPanel.add(btnHard, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, 32));
 
         javax.swing.GroupLayout JPanelLayout = new javax.swing.GroupLayout(JPanel);
@@ -125,9 +130,16 @@ public class Application extends javax.swing.JFrame {
 
     private void btnEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEasyActionPerformed
         // TODO add your handling code here:
-        NaiveBotPanel naive = new NaiveBotPanel();
+        NaiveBot naive = new NaiveBot();
         splitPane.setRightComponent(naive);
     }//GEN-LAST:event_btnEasyActionPerformed
+
+    private void btnHardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHardActionPerformed
+        // TODO add your handling code here:
+        HumanStratergy human = new HumanStratergy();
+        splitPane.setRightComponent(human);
+        
+    }//GEN-LAST:event_btnHardActionPerformed
 
     /**
      * @param args the command line arguments
