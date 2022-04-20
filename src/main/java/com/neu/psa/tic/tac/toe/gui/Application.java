@@ -23,8 +23,8 @@ public class Application extends JFrame implements ActionListener {
 		frame.getContentPane().setBackground(new Color(50,50,50));
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
-                textfield.setBackground(new Color(25,25,25));
-		textfield.setForeground(new Color(25,255,0));
+                textfield.setBackground(new Color(150,150,150));
+		textfield.setForeground(new Color(0,0,255));
 		textfield.setFont(new Font("Ink Free",Font.BOLD,75));
 		textfield.setHorizontalAlignment(JLabel.CENTER);
 		textfield.setText("Tic-Tac-Toe");
@@ -47,6 +47,7 @@ public class Application extends JFrame implements ActionListener {
                 title_panel.add(textfield);
 		frame.add(title_panel,BorderLayout.NORTH);
 		frame.add(button_panel);
+                firstTurn();
         }
 
 //    public Application() {
@@ -276,6 +277,25 @@ public class Application extends JFrame implements ActionListener {
 		}
             textfield.setText("Its a Draw");
         }
+        
+        public void firstTurn() {
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(random.nextInt(2)==0) {
+			player1_turn=true;
+			textfield.setText("X turn");
+		}
+		else {
+			player1_turn=false;
+			textfield.setText("O turn");
+		}
+	}
 
     @Override
     public void actionPerformed(ActionEvent e) {
