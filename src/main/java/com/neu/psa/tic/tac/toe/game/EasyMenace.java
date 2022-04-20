@@ -11,7 +11,10 @@ import javax.swing.JButton;
  */
 public class EasyMenace {
     
+    
+    
     public int easyMove(JButton[] buttons){
+        
         Random ran = new Random();
         // check if place is empty;if true then return index of empty space.
         // TODO: check for Draw
