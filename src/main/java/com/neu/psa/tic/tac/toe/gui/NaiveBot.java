@@ -7,6 +7,7 @@ package com.neu.psa.tic.tac.toe.gui;
 
 import com.neu.psa.tic.tac.toe.game.EasyMenace;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,6 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
     
     JButton[] buttons = new JButton[9];
     boolean player1_turn = true;
-    Application app = new Application();
     /**
      * Creates new form NaiveBotPanel
      */
@@ -41,21 +41,54 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
     private void initComponents() {
 
         gamePanel = new java.awt.Panel();
+        statusPanel = new javax.swing.JPanel();
+        textField = new javax.swing.JTextField();
 
         gamePanel.setBackground(new java.awt.Color(0, 0, 0));
+        gamePanel.setPreferredSize(new java.awt.Dimension(800, 600));
         gamePanel.setLayout(new java.awt.GridLayout(3, 3));
+
+        textField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textField.setText("Game Status: ");
+        textField.setEnabled(false);
+        textField.setPreferredSize(new java.awt.Dimension(800, 800));
+        textField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
+        statusPanel.setLayout(statusPanelLayout);
+        statusPanelLayout.setHorizontalGroup(
+            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(textField, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+        statusPanelLayout.setVerticalGroup(
+            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(textField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+            .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void textFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldActionPerformed
     
     private void createGridButtons(){
             for (int i = 0; i < 9; i++) {
@@ -70,6 +103,8 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Panel gamePanel;
+    private javax.swing.JPanel statusPanel;
+    private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -81,7 +116,7 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
                         buttons[i].setForeground(new Color(255, 0, 0));
                         buttons[i].setText("X");
                         player1_turn = false;
-                        app.textField.setText("O turn");
+                        textField.setText("O turn");
                         check();
                         checkfordraw();
                     }
@@ -93,7 +128,7 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
                         buttons[index].setForeground(new Color(0, 0, 255));
                         buttons[index].setText("O");
                         player1_turn = true;
-                        app.textField.setText("X turn");
+                        textField.setText("X turn");
                         check();
                         checkfordraw();
                     }
@@ -230,7 +265,7 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
             buttons[i].setEnabled(false);
         }
         
-        app.textField.setText("X wins");
+        textField.setText("X wins");
     }
 
     public void oWins(int a, int b, int c) {
@@ -242,7 +277,7 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
             buttons[i].setEnabled(false);
         }
         
-        app.textField.setText("O wins");
+        textField.setText("O wins");
     }
 
     public void itsdraw() {
@@ -250,7 +285,7 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
             buttons[i].setEnabled(false);
         }
         
-        app.textField.setText("Its a Draw");
+        textField.setText("Its a Draw");
     }
 
     public void firstTurn() {

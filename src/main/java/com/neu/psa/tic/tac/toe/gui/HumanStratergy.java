@@ -7,6 +7,7 @@ package com.neu.psa.tic.tac.toe.gui;
 
 import com.neu.psa.tic.tac.toe.game.EasyMenace;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,18 +17,19 @@ import javax.swing.JButton;
  *
  * @author vidhi
  */
-public class HumanStratergy extends javax.swing.JPanel implements ActionListener {
+public class HumanStratergy extends javax.swing.JPanel implements ActionListener{
 
+    
     JButton[] buttons = new JButton[9];
     boolean player1_turn = true;
     Application app = new Application();
-
     /**
-     * Creates new form HumanStratergy
+     * Creates new form NaiveBotPanel
      */
     public HumanStratergy() {
         initComponents();
         createGridButtons();
+
     }
 
     /**
@@ -39,25 +41,26 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        gamePanel = new javax.swing.JPanel();
+        gamePanel = new java.awt.Panel();
 
         gamePanel.setBackground(new java.awt.Color(0, 0, 0));
+        gamePanel.setPreferredSize(new java.awt.Dimension(800, 600));
         gamePanel.setLayout(new java.awt.GridLayout(3, 3));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gamePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void createGridButtons() {
-        for (int i = 0; i < 9; i++) {
+    
+    private void createGridButtons(){
+            for (int i = 0; i < 9; i++) {
             buttons[i] = new JButton();
             gamePanel.add(buttons[i]);
             buttons[i].setFont(new Font("MV Boli", Font.BOLD, 120));
@@ -68,12 +71,12 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel gamePanel;
+    private java.awt.Panel gamePanel;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) {            
             if (e.getSource() == buttons[i]) {
                 if (player1_turn) {
                     if (buttons[i].getText() == "") {
@@ -84,7 +87,7 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
                         check();
                         checkfordraw();
                     }
-                } else {
+               } else {
 
                     if (buttons[i].getText() == "") {
                         buttons[i].setForeground(new Color(0, 0, 255));
@@ -98,7 +101,7 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
             }
         }
     }
-
+    
     public boolean check() {
         //check X win conditions
         if ((buttons[0].getText() == "X")
@@ -226,7 +229,7 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-
+        
         app.textField.setText("X wins");
     }
 
@@ -238,7 +241,7 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-
+        
         app.textField.setText("O wins");
     }
 
@@ -246,7 +249,7 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-
+        
         app.textField.setText("Its a Draw");
     }
 
@@ -256,7 +259,7 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+           e.printStackTrace();
         }
 
 //        if (random.nextInt(2) == 0) {
