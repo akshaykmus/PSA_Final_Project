@@ -22,7 +22,7 @@ public class EasyMenace {
         while(buttons[a].getText()!=""){
         a = ran.nextInt(9);
         }
-        return a;
+        return a; 
    
        
         

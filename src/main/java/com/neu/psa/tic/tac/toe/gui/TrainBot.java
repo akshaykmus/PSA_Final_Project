@@ -17,7 +17,7 @@ import javax.swing.JButton;
  *
  * @author vidhi
  */
-public class NaiveBot extends javax.swing.JPanel implements ActionListener{
+public class TrainBot extends javax.swing.JPanel implements ActionListener{
 
     
     JButton[] buttons = new JButton[9];
@@ -25,7 +25,7 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
     /**
      * Creates new form NaiveBotPanel
      */
-    public NaiveBot() {
+    public TrainBot() {
         initComponents();
         createGridButtons();
 
@@ -50,9 +50,9 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
 
         textField.setBackground(new java.awt.Color(102, 102, 255));
         textField.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
-        textField.setForeground(new java.awt.Color(255, 102, 255));
+        textField.setForeground(new java.awt.Color(102, 102, 255));
         textField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textField.setText("Game Status: ");
+        textField.setText("Game Status");
         textField.setDisabledTextColor(new java.awt.Color(255, 102, 255));
         textField.setEnabled(false);
         textField.setPreferredSize(new java.awt.Dimension(800, 800));
