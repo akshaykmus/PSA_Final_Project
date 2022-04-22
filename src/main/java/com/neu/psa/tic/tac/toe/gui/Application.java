@@ -36,16 +36,24 @@ public class Application extends javax.swing.JFrame {
         buttonPanel = new javax.swing.JPanel();
         btnEasy = new javax.swing.JButton();
         btnHard = new javax.swing.JButton();
+        btnTrain = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
+        splitPane.setBackground(new java.awt.Color(102, 102, 255));
         splitPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         splitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        splitPane.setMinimumSize(new java.awt.Dimension(300, 300));
 
-        textField.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        textField.setBackground(new java.awt.Color(102, 102, 255));
+        textField.setFont(new java.awt.Font("Helvetica Neue", 3, 120)); // NOI18N
+        textField.setForeground(new java.awt.Color(102, 102, 255));
         textField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         textField.setText("Tic Tac Toe");
         textField.setCaretColor(new java.awt.Color(0, 0, 204));
+        textField.setDisabledTextColor(new java.awt.Color(255, 102, 255));
+        textField.setEnabled(false);
 
         javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
         titlePanel.setLayout(titlePanelLayout);
@@ -55,13 +63,15 @@ public class Application extends javax.swing.JFrame {
         );
         titlePanelLayout.setVerticalGroup(
             titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(titlePanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titlePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(textField)
+                .addComponent(textField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         splitPane.setTopComponent(titlePanel);
+
+        gamePanel.setPreferredSize(new java.awt.Dimension(1000, 1000));
 
         javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
         gamePanel.setLayout(gamePanelLayout);
@@ -71,45 +81,55 @@ public class Application extends javax.swing.JFrame {
         );
         gamePanelLayout.setVerticalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 215, Short.MAX_VALUE)
+            .addGap(0, 564, Short.MAX_VALUE)
         );
 
         splitPane.setRightComponent(gamePanel);
 
+        buttonPanel.setPreferredSize(new java.awt.Dimension(162, 68));
         buttonPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnEasy.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
         btnEasy.setText("Easy");
         btnEasy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEasyActionPerformed(evt);
             }
         });
-        buttonPanel.add(btnEasy, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, 32));
+        buttonPanel.add(btnEasy, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 130, 50));
 
+        btnHard.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
         btnHard.setText("Hard");
         btnHard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHardActionPerformed(evt);
             }
         });
-        buttonPanel.add(btnHard, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, 32));
+        buttonPanel.add(btnHard, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 150, 50));
+
+        btnTrain.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
+        btnTrain.setText("Train");
+        btnTrain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrainActionPerformed(evt);
+            }
+        });
+        buttonPanel.add(btnTrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 140, 50));
 
         javax.swing.GroupLayout JPanelLayout = new javax.swing.GroupLayout(JPanel);
         JPanel.setLayout(JPanelLayout);
         JPanelLayout.setHorizontalGroup(
             JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         JPanelLayout.setVerticalGroup(
             JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPanelLayout.createSequentialGroup()
-                .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 32, Short.MAX_VALUE)
-                .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -120,9 +140,7 @@ public class Application extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(JPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(JPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -136,10 +154,16 @@ public class Application extends javax.swing.JFrame {
 
     private void btnHardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHardActionPerformed
         // TODO add your handling code here:
-        HumanStratergy human = new HumanStratergy();
-        splitPane.setRightComponent(human);
+        TrainBot train = new TrainBot();
+        splitPane.setRightComponent(train);
         
     }//GEN-LAST:event_btnHardActionPerformed
+
+    private void btnTrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrainActionPerformed
+        // TODO add your handling code here:
+        HumanStratergy human = new HumanStratergy();
+        splitPane.setRightComponent(human);
+    }//GEN-LAST:event_btnTrainActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,6 +205,7 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JPanel JPanel;
     private javax.swing.JButton btnEasy;
     private javax.swing.JButton btnHard;
+    private javax.swing.JButton btnTrain;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JPanel gamePanel;
     private javax.swing.JSplitPane splitPane;

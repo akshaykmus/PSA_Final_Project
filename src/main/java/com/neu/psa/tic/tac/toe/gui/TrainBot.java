@@ -17,7 +17,7 @@ import javax.swing.JButton;
  *
  * @author vidhi
  */
-public class HumanStratergy extends javax.swing.JPanel implements ActionListener{
+public class TrainBot extends javax.swing.JPanel implements ActionListener{
 
     
     JButton[] buttons = new JButton[9];
@@ -25,7 +25,7 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
     /**
      * Creates new form NaiveBotPanel
      */
-    public HumanStratergy() {
+    public TrainBot() {
         initComponents();
         createGridButtons();
 
@@ -121,6 +121,7 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
                     if (buttons[i].getText() == "") {
                         buttons[i].setForeground(new Color(255, 0, 0));
                         buttons[i].setText("X");
+                        buttons[i].setEnabled(false);
                         player1_turn = false;
                         textField.setText("O turn");
                         check();
@@ -133,6 +134,7 @@ public class HumanStratergy extends javax.swing.JPanel implements ActionListener
                     if (buttons[index].getText() == "") {
                         buttons[index].setForeground(new Color(0, 0, 255));
                         buttons[index].setText("O");
+                        buttons[index].setEnabled(false);
                         player1_turn = true;
                         textField.setText("X turn");
                         check();
