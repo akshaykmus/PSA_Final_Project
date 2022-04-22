@@ -15,11 +15,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
  */
 public class Excelutil {
 
-    public static void main(String[] args) throws IOException {
-        writeData(1,2,3);
-        getData(1, 2);
-
-    }
 
     public static double getData(int value1, int value2) {
         double value = 0;

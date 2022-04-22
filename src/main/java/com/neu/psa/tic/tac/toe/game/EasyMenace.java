@@ -20,7 +20,8 @@ public class EasyMenace {
         // TODO: check for Draw
         int a = ran.nextInt(9);
         while(buttons[a].getText()!=""){
-        a = ran.nextInt(9);
+            
+              a = ran.nextInt(9);
         }
         return a; 
    
