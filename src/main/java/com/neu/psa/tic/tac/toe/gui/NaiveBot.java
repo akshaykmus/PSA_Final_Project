@@ -17,11 +17,11 @@ import javax.swing.JButton;
  *
  * @author vidhi
  */
-public class NaiveBot extends javax.swing.JPanel implements ActionListener{
+public class NaiveBot extends javax.swing.JPanel implements ActionListener {
 
-    
     JButton[] buttons = new JButton[9];
     boolean player1_turn = true;
+
     /**
      * Creates new form NaiveBotPanel
      */
@@ -95,9 +95,9 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
     private void textFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldActionPerformed
-    
-    private void createGridButtons(){
-            for (int i = 0; i < 9; i++) {
+
+    private void createGridButtons() {
+        for (int i = 0; i < 9; i++) {
             buttons[i] = new JButton();
             gamePanel.add(buttons[i]);
             buttons[i].setFont(new Font("MV Boli", Font.BOLD, 120));
@@ -115,36 +115,58 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < 9; i++) {            
+        for (int i = 0; i < 9; i++) {
             if (e.getSource() == buttons[i]) {
                 if (player1_turn) {
                     if (buttons[i].getText() == "") {
+                       
                         buttons[i].setForeground(new Color(255, 0, 0));
                         buttons[i].setText("X");
                         buttons[i].setEnabled(false);
                         player1_turn = false;
+                        //System.out.println(player1_turn);
                         textField.setText("O turn");
+                        //System.out.println(i);
                         check();
                         checkfordraw();
                     }
 //                } else {
-
+                    //System.out.println(index);
+                    
+//                    for (int j = 0; j < 9; j++) {
+//                        if(buttons[j].getText()!=""){
+//                            
+//                        }
+//                    }
+                    if (!boardFull()) {
+                    System.out.println(boardFull());
                     EasyMenace eM = new EasyMenace();
                     int index = eM.easyMove(buttons);
-                    if (buttons[index].getText() == "") {
-                        buttons[index].setForeground(new Color(0, 0, 255));
-                        buttons[index].setText("O");
-                        buttons[index].setEnabled(false);
-                        player1_turn = true;
-                        textField.setText("X turn");
+                    //System.out.println(index);
                         check();
                         checkfordraw();
+                        if (buttons[index].getText() == "") {
+                            check();
+                            checkfordraw();
+                            buttons[index].setForeground(new Color(0, 0, 255));
+                            buttons[index].setText("O");
+                            buttons[index].setEnabled(false);
+                            player1_turn = true;
+                            textField.setText("X turn");
+                            System.out.println(index);
+                            check();
+                            checkfordraw();
+                        }
+
                     }
+                    check();
+                    checkfordraw();
+
                 }
             }
         }
     }
-    
+
     public boolean check() {
         //check X win conditions
         if ((buttons[0].getText() == "X")
@@ -272,7 +294,7 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-        
+
         textField.setText("X wins");
     }
 
@@ -284,7 +306,7 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-        
+
         textField.setText("O wins");
     }
 
@@ -292,8 +314,26 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-        
+
         textField.setText("Its a Draw");
+    }
+    
+    public boolean boardFull(){
+        int i;
+        int a=0;
+        for (i = 0; i < 9; i++) {
+          if(buttons[i].getText()!=""){
+              a++;
+//              continue;      
+          }
+          //return true; 
+        }
+        if(a==9){
+            System.out.println(a);
+            return true;
+        }
+        
+        return false;
     }
 
     public void firstTurn() {
@@ -302,7 +342,7 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener{
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
-           e.printStackTrace();
+            e.printStackTrace();
         }
 
 //        if (random.nextInt(2) == 0) {
