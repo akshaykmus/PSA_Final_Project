@@ -134,7 +134,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
                     if (buttons[index].getText() == "") {
                         buttons[index].setForeground(new Color(0, 0, 255));
                         buttons[index].setText("O");
-                        buttons[i].setEnabled(false);
+                        buttons[index].setEnabled(false);
                         player1_turn = true;
                         textField.setText("X turn");
                         check();
