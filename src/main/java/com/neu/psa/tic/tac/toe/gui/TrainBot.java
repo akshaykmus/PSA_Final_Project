@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 
 /**
@@ -132,7 +134,9 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
 //                } else {
 
                     TrainedMenace tm = new TrainedMenace();
-                    int index = tm.menacemove(buttons,move);
+                    List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
+                    int index = tm.menacemove(buttons,move,emptySpaces);
+                    System.out.println("See this " + index);
                     if (buttons[index].getText() == "") {
                         buttons[index].setForeground(new Color(0, 0, 255));
                         buttons[index].setText("O");
@@ -297,6 +301,16 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
         }
         
         textField.setText("Its a Draw");
+    }
+    
+    public List<Integer> getAllEmptySpacesOnBoard(JButton[] buttons){
+        List<Integer> emptySpaces = new ArrayList<>();
+        for(int i=0;i<9;i++){
+            if (buttons[i].getText()== "") {
+                emptySpaces.add(i);
+            }
+        }
+        return emptySpaces;
     }
 
     public void firstTurn() {

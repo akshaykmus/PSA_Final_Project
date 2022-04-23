@@ -6,6 +6,7 @@ package com.neu.psa.tic.tac.toe.game;
 
 import javax.swing.JButton;
 import java.util.Hashtable;
+import java.util.List;
 
 /**
  *
@@ -32,33 +33,33 @@ public class TrainedMenace {
     
     
 
-    public int menacemove(JButton[] buttons,int move) {
+    public int menacemove(JButton[] buttons,int move,List<Integer> empty) {
         int key=-1;
         init();
         
         
         if(move==1){
-             key = h.getMaxValueFromHashTable(ht1);
+             key = h.getMaxValueFromHashTable(ht1,empty);
              System.out.println(key);
             
         }
         else if(move==2){
-             key = h.getMaxValueFromHashTable(ht2);
+             key = h.getMaxValueFromHashTable(ht2,empty);
             
             
         }
         else if(move==3){
-             key = h.getMaxValueFromHashTable(ht3);
+             key = h.getMaxValueFromHashTable(ht3,empty);
            
             
         }
         else if(move==4){
-             key = h.getMaxValueFromHashTable(ht4);
+             key = h.getMaxValueFromHashTable(ht4,empty);
            
             
         }
         else if(move==5){
-             key = h.getMaxValueFromHashTable(ht5);
+             key = h.getMaxValueFromHashTable(ht5,empty);
            
         }
         
@@ -66,5 +67,9 @@ public class TrainedMenace {
         return key;
 
     }
+
+//    public int menacemove(JButton[] buttons, int move, List<Integer> emptySpaces) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 
 }

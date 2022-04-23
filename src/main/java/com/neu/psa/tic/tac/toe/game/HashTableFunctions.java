@@ -39,16 +39,18 @@ public class HashTableFunctions {
         return ht;
     }
 
-    public Integer getMaxValueFromHashTable(Hashtable<Integer, Integer> ht) {
-        int max = ht.get(0);
-        int key = 0;
+    public Integer getMaxValueFromHashTable(Hashtable<Integer, Integer> ht,List<Integer> emptySpaces) {
+        int max = ht.get(emptySpaces.get(0));
+        int key = emptySpaces.get(0);
 
-        for (int i = 1; i < 9; i++) {
-            if (ht.get(i) > max) {
-                max = ht.get(i);
-                key = i;
+        for (int i=0;i<emptySpaces.size();i++) {
+            if (ht.get(emptySpaces.get(i)) > max) {
+                max = ht.get(emptySpaces.get(i));
+                key = emptySpaces.get(i);
             }
         }
+        
+        
         return key;
     }
 
