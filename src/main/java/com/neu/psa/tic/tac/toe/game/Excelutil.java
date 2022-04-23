@@ -14,6 +14,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
  * @author akshaykumthimatad
  */
 public class Excelutil {
+    
+//    public static void main(String[] args){
+//        writeData(1,4,0);
+//       // getData(1,4);
+//        
+//    }
 
 
     public static double getData(int value1, int value2) {
@@ -49,7 +55,7 @@ public class Excelutil {
             e.printStackTrace();
         }
 
-        System.out.print(value);
+        //System.out.print(value);
     }
 
 }

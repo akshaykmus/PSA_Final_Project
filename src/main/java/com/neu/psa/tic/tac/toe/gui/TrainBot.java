@@ -6,6 +6,7 @@
 package com.neu.psa.tic.tac.toe.gui;
 
 import com.neu.psa.tic.tac.toe.game.EasyMenace;
+import com.neu.psa.tic.tac.toe.game.TrainedMenace;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -112,7 +113,8 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
     private javax.swing.JPanel statusPanel;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
-
+    
+    int move = 1;
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < 9; i++) {            
@@ -129,14 +131,15 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
                     }
 //                } else {
 
-                    EasyMenace eM = new EasyMenace();
-                    int index = eM.easyMove(buttons);
+                    TrainedMenace tm = new TrainedMenace();
+                    int index = tm.menacemove(buttons,move);
                     if (buttons[index].getText() == "") {
                         buttons[index].setForeground(new Color(0, 0, 255));
                         buttons[index].setText("O");
                         buttons[index].setEnabled(false);
                         player1_turn = true;
                         textField.setText("X turn");
+                        move++;
                         check();
                         checkfordraw();
                     }
