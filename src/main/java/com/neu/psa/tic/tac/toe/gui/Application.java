@@ -1,5 +1,7 @@
 package com.neu.psa.tic.tac.toe.gui;
 
+import com.neu.psa.tic.tac.toe.game.HumanStrategy;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -161,8 +163,8 @@ public class Application extends javax.swing.JFrame {
 
     private void btnTrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrainActionPerformed
         // TODO add your handling code here:
-        HumanStratergy human = new HumanStratergy();
-        splitPane.setRightComponent(human);
+        HumanStrategy human = new HumanStrategy();
+//        splitPane.setRightComponent(human);
     }//GEN-LAST:event_btnTrainActionPerformed
 
     /**

@@ -32,8 +32,11 @@ public class Excelutil {
         return value;
     }
 
-    public static void writeData(int row, int col, int value) throws IOException {
-        String path = "./src/main/java/com/neu/psa/tic/tac/toe/game/ExcelUtils/data.xlsx";
+    public static void writeData(int row, int col, int value){
+       
+        
+        try {
+             String path = "./src/main/java/com/neu/psa/tic/tac/toe/game/ExcelUtils/data.xlsx";
         XSSFWorkbook work = new XSSFWorkbook(path);
         XSSFSheet sheet = work.getSheet("Sheet1");
         sheet.getRow(row).getCell(col).setCellValue(value);
@@ -41,6 +44,10 @@ public class Excelutil {
         work.write(fos);
         fos.flush();
         fos.close();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         System.out.print(value);
     }
