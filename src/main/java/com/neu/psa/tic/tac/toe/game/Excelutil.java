@@ -4,6 +4,7 @@
  */
 package com.neu.psa.tic.tac.toe.game;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -16,8 +17,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 public class Excelutil {
     
 //    public static void main(String[] args){
-//        writeData(1,4,0);
-//       // getData(1,4);
+//        writeData(1,3,10);
+//        getData(1,3);
 //        
 //    }
 
@@ -42,7 +43,7 @@ public class Excelutil {
        
         
         try {
-             String path = "./src/main/java/com/neu/psa/tic/tac/toe/game/ExcelUtils/data.xlsx";
+        String path = "./src/main/java/com/neu/psa/tic/tac/toe/game/ExcelUtils/data.xlsx";
         XSSFWorkbook work = new XSSFWorkbook(path);
         XSSFSheet sheet = work.getSheet("Sheet1");
         sheet.getRow(row).getCell(col).setCellValue(value);

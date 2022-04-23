@@ -19,7 +19,7 @@ public class HashTableFunctions {
     // Note: HashTable values (0-8) are initialised to 0.
     public Hashtable<Integer, Integer> crateNewHash() {
         Hashtable<Integer, Integer> ht1 = new Hashtable<>();
-        ht1.put(0, 0);
+        ht1.put(0, 3);
         ht1.put(1, 0);
         ht1.put(2, 0);
         ht1.put(3, 0);
@@ -56,13 +56,15 @@ public class HashTableFunctions {
 
     public void writeToExcel(int moveNumber, Hashtable<Integer, Integer> ht) {
         for (int i = 0; i < 9; i++) {
-            Excelutil.writeData(moveNumber, i, ht.get(i));
+            System.out.println(ht.get(i).intValue());
+            Excelutil.writeData(moveNumber, i+1, ht.get(i).intValue());
 
         }
     }
 
     public Hashtable<Integer, Integer> readFromExcel(Hashtable<Integer, Integer> ht, int moveNumber) {
         for (int i = 0; i < 9; i++) {
+            
             int d = (int) Excelutil.getData(moveNumber, i + 1);
 
             ht.put(i, d);

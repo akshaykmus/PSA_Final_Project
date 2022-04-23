@@ -117,6 +117,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
     // End of variables declaration//GEN-END:variables
     
     int move = 1;
+    List<Integer> playedPos = new ArrayList<>();
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < 9; i++) {            
@@ -136,7 +137,6 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
                     TrainedMenace tm = new TrainedMenace();
                     List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
                     int index = tm.menacemove(buttons,move,emptySpaces);
-                    System.out.println("See this " + index);
                     if (buttons[index].getText() == "") {
                         buttons[index].setForeground(new Color(0, 0, 255));
                         buttons[index].setText("O");
@@ -146,6 +146,16 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
                         move++;
                         check();
                         checkfordraw();
+                        playedPos.add(index);
+                        
+                        if(textField.getText().equalsIgnoreCase("X wins")){
+                            System.err.println("X checkpoint reached");
+                               tm.punish(playedPos);
+                        }
+                        if(textField.getText().equalsIgnoreCase("O wins")){
+                            System.err.println("O checkpoint reached");
+                            tm.reward(playedPos);
+                        }
                     }
                 }
             }
