@@ -113,8 +113,18 @@ public class Application extends javax.swing.JFrame {
         buttonPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnEasy.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
+        btnEasy.setForeground(new java.awt.Color(255, 102, 255));
         btnEasy.setText("Easy");
-        btnEasy.setOpaque(true);
+        btnEasy.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEasy.setContentAreaFilled(false);
+        btnEasy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnEasyMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnEasyMouseReleased(evt);
+            }
+        });
         btnEasy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEasyActionPerformed(evt);
@@ -123,7 +133,19 @@ public class Application extends javax.swing.JFrame {
         buttonPanel.add(btnEasy, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 130, 50));
 
         btnHard.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
+        btnHard.setForeground(new java.awt.Color(255, 102, 255));
         btnHard.setText("Hard");
+        btnHard.setToolTipText("");
+        btnHard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnHard.setContentAreaFilled(false);
+        btnHard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnHardMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnHardMouseReleased(evt);
+            }
+        });
         btnHard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHardActionPerformed(evt);
@@ -132,7 +154,18 @@ public class Application extends javax.swing.JFrame {
         buttonPanel.add(btnHard, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 150, 50));
 
         btnTrain.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
+        btnTrain.setForeground(new java.awt.Color(255, 102, 255));
         btnTrain.setText("Train");
+        btnTrain.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnTrain.setContentAreaFilled(false);
+        btnTrain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnTrainMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnTrainMouseReleased(evt);
+            }
+        });
         btnTrain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTrainActionPerformed(evt);
@@ -192,6 +225,36 @@ public class Application extends javax.swing.JFrame {
     private void textFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldActionPerformed
+
+    private void btnEasyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEasyMousePressed
+        // TODO add your handling code here:
+        btnEasy.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+    }//GEN-LAST:event_btnEasyMousePressed
+
+    private void btnHardMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHardMousePressed
+        // TODO add your handling code here:
+        btnHard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+    }//GEN-LAST:event_btnHardMousePressed
+
+    private void btnTrainMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrainMousePressed
+        // TODO add your handling code here:
+        btnTrain.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+    }//GEN-LAST:event_btnTrainMousePressed
+
+    private void btnEasyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEasyMouseReleased
+        // TODO add your handling code here:
+        btnEasy.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    }//GEN-LAST:event_btnEasyMouseReleased
+
+    private void btnHardMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHardMouseReleased
+        // TODO add your handling code here:
+        btnHard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    }//GEN-LAST:event_btnHardMouseReleased
+
+    private void btnTrainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrainMouseReleased
+        // TODO add your handling code here:
+        btnTrain.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    }//GEN-LAST:event_btnTrainMouseReleased
 
     /**
      * @param args the command line arguments
