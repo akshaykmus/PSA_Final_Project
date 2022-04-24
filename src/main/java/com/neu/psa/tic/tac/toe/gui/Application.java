@@ -43,12 +43,18 @@ public class Application extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        splitPane.setBackground(new java.awt.Color(102, 102, 255));
+        JPanel.setBackground(new java.awt.Color(0, 0, 0));
+
+        splitPane.setBackground(new java.awt.Color(0, 0, 0));
         splitPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         splitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         splitPane.setMinimumSize(new java.awt.Dimension(300, 300));
 
-        textField.setBackground(new java.awt.Color(102, 102, 255));
+        titlePanel.setBackground(new java.awt.Color(0, 0, 0));
+        titlePanel.setToolTipText("");
+
+        textField.setEditable(false);
+        textField.setBackground(new java.awt.Color(0, 0, 0));
         textField.setFont(new java.awt.Font("Helvetica Neue", 3, 120)); // NOI18N
         textField.setForeground(new java.awt.Color(102, 102, 255));
         textField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -56,6 +62,7 @@ public class Application extends javax.swing.JFrame {
         textField.setCaretColor(new java.awt.Color(0, 0, 204));
         textField.setDisabledTextColor(new java.awt.Color(255, 102, 255));
         textField.setEnabled(false);
+        textField.setSelectedTextColor(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
         titlePanel.setLayout(titlePanelLayout);
@@ -73,6 +80,7 @@ public class Application extends javax.swing.JFrame {
 
         splitPane.setTopComponent(titlePanel);
 
+        gamePanel.setBackground(new java.awt.Color(0, 0, 0));
         gamePanel.setPreferredSize(new java.awt.Dimension(1000, 1000));
 
         javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
@@ -88,6 +96,7 @@ public class Application extends javax.swing.JFrame {
 
         splitPane.setRightComponent(gamePanel);
 
+        buttonPanel.setBackground(new java.awt.Color(0, 0, 0));
         buttonPanel.setPreferredSize(new java.awt.Dimension(162, 68));
         buttonPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

@@ -20,11 +20,11 @@ import javax.swing.JButton;
  *
  * @author vidhi
  */
-public class TrainBot extends javax.swing.JPanel implements ActionListener{
+public class TrainBot extends javax.swing.JPanel implements ActionListener {
 
-    
     JButton[] buttons = new JButton[9];
     boolean player1_turn = true;
+
     /**
      * Creates new form NaiveBotPanel
      */
@@ -51,13 +51,15 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
         gamePanel.setPreferredSize(new java.awt.Dimension(800, 600));
         gamePanel.setLayout(new java.awt.GridLayout(3, 3));
 
-        textField.setBackground(new java.awt.Color(102, 102, 255));
+        textField.setEditable(false);
+        textField.setBackground(new java.awt.Color(0, 0, 0));
         textField.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
         textField.setForeground(new java.awt.Color(102, 102, 255));
         textField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         textField.setText("Game Status");
         textField.setDisabledTextColor(new java.awt.Color(255, 102, 255));
         textField.setEnabled(false);
+        textField.setOpaque(true);
         textField.setPreferredSize(new java.awt.Dimension(800, 800));
         textField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,12 +100,15 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
     private void textFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldActionPerformed
-    
-    private void createGridButtons(){
-            for (int i = 0; i < 9; i++) {
+
+    private void createGridButtons() {
+        for (int i = 0; i < 9; i++) {
             buttons[i] = new JButton();
             gamePanel.add(buttons[i]);
             buttons[i].setFont(new Font("MV Boli", Font.BOLD, 120));
+            buttons[i].setBackground(Color.BLACK);
+            buttons[i].setOpaque(true);
+            buttons[i].setBorderPainted(false);
             buttons[i].setFocusable(false);
             buttons[i].addActionListener(this);
         }
@@ -115,12 +120,13 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
     private javax.swing.JPanel statusPanel;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
-    
+
     int move = 1;
     List<Integer> playedPos = new ArrayList<>();
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < 9; i++) {            
+        for (int i = 0; i < 9; i++) {
             if (e.getSource() == buttons[i]) {
                 if (player1_turn) {
                     if (buttons[i].getText() == "") {
@@ -136,7 +142,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
 
                     TrainedMenace tm = new TrainedMenace();
                     List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
-                    int index = tm.menacemove(buttons,move,emptySpaces);
+                    int index = tm.menacemove(buttons, move, emptySpaces);
                     if (buttons[index].getText() == "") {
                         buttons[index].setForeground(new Color(0, 0, 255));
                         buttons[index].setText("O");
@@ -147,12 +153,12 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
                         check();
                         checkfordraw();
                         playedPos.add(index);
-                        
-                        if(textField.getText().equalsIgnoreCase("X wins")){
+
+                        if (textField.getText().equalsIgnoreCase("X wins")) {
                             System.err.println("X checkpoint reached");
-                               tm.punish(playedPos);
+                            tm.punish(playedPos);
                         }
-                        if(textField.getText().equalsIgnoreCase("O wins")){
+                        if (textField.getText().equalsIgnoreCase("O wins")) {
                             System.err.println("O checkpoint reached");
                             tm.reward(playedPos);
                         }
@@ -161,7 +167,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
             }
         }
     }
-    
+
     public boolean check() {
         //check X win conditions
         if ((buttons[0].getText() == "X")
@@ -289,7 +295,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-        
+
         textField.setText("X wins");
     }
 
@@ -301,7 +307,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-        
+
         textField.setText("O wins");
     }
 
@@ -309,14 +315,14 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-        
+
         textField.setText("Its a Draw");
     }
-    
-    public List<Integer> getAllEmptySpacesOnBoard(JButton[] buttons){
+
+    public List<Integer> getAllEmptySpacesOnBoard(JButton[] buttons) {
         List<Integer> emptySpaces = new ArrayList<>();
-        for(int i=0;i<9;i++){
-            if (buttons[i].getText()== "") {
+        for (int i = 0; i < 9; i++) {
+            if (buttons[i].getText() == "") {
                 emptySpaces.add(i);
             }
         }
@@ -329,7 +335,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener{
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
-           e.printStackTrace();
+            e.printStackTrace();
         }
 
 //        if (random.nextInt(2) == 0) {

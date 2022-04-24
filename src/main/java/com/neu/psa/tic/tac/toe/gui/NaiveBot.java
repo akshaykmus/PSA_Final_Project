@@ -48,13 +48,15 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
         gamePanel.setPreferredSize(new java.awt.Dimension(800, 600));
         gamePanel.setLayout(new java.awt.GridLayout(3, 3));
 
-        textField.setBackground(new java.awt.Color(102, 102, 255));
+        textField.setEditable(false);
+        textField.setBackground(new java.awt.Color(0, 0, 0));
         textField.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
         textField.setForeground(new java.awt.Color(255, 102, 255));
         textField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textField.setText("Game Status: ");
+        textField.setText("Game Status");
         textField.setDisabledTextColor(new java.awt.Color(255, 102, 255));
         textField.setEnabled(false);
+        textField.setOpaque(true);
         textField.setPreferredSize(new java.awt.Dimension(800, 800));
         textField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +103,9 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
             buttons[i] = new JButton();
             gamePanel.add(buttons[i]);
             buttons[i].setFont(new Font("MV Boli", Font.BOLD, 120));
+            buttons[i].setBackground(Color.BLACK);
+            buttons[i].setOpaque(true);
+            buttons[i].setBorderPainted(false);
             buttons[i].setFocusable(false);
             buttons[i].addActionListener(this);
         }
@@ -119,7 +124,6 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
             if (e.getSource() == buttons[i]) {
                 if (player1_turn) {
                     if (buttons[i].getText() == "") {
-                       
                         buttons[i].setForeground(new Color(255, 0, 0));
                         buttons[i].setText("X");
                         buttons[i].setEnabled(false);
@@ -132,17 +136,17 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
                     }
 //                } else {
                     //System.out.println(index);
-                    
+
 //                    for (int j = 0; j < 9; j++) {
 //                        if(buttons[j].getText()!=""){
 //                            
 //                        }
 //                    }
                     if (!boardFull()) {
-                    System.out.println(boardFull());
-                    EasyMenace eM = new EasyMenace();
-                    int index = eM.easyMove(buttons);
-                    //System.out.println(index);
+                        System.out.println(boardFull());
+                        EasyMenace eM = new EasyMenace();
+                        int index = eM.easyMove(buttons);
+                        //System.out.println(index);
                         check();
                         checkfordraw();
                         if (buttons[index].getText() == "") {
@@ -317,22 +321,22 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
 
         textField.setText("Its a Draw");
     }
-    
-    public boolean boardFull(){
+
+    public boolean boardFull() {
         int i;
-        int a=0;
+        int a = 0;
         for (i = 0; i < 9; i++) {
-          if(buttons[i].getText()!=""){
-              a++;
+            if (buttons[i].getText() != "") {
+                a++;
 //              continue;      
-          }
-          //return true; 
+            }
+            //return true; 
         }
-        if(a==9){
+        if (a == 9) {
             System.out.println(a);
             return true;
         }
-        
+
         return false;
     }
 
