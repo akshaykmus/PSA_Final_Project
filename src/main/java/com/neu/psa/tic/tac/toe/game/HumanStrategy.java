@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.JButton;
 
 public class HumanStrategy {
     // empty space =-1, Human play=1, Trained bot play=0;
@@ -190,9 +191,7 @@ public class HumanStrategy {
         System.out.println("-----------");
     }
 
-    public void trainedBotMove(){
-
-    }
+  
 
     public void printList(List<Integer> list, String type){
         System.out.println("Printing available " + type);
@@ -243,4 +242,87 @@ public class HumanStrategy {
             h.printBoard(board);
         }
     }
+    
+    
+    public Integer[] convertGuiBoardToInts(JButton[] buttons){
+        Integer[] arr = new Integer[9];
+        for(int i=0;i<9;i++){
+            if(buttons[i].getText() == "") arr[i]=-1;
+            if(buttons[i].getText() == "X") arr[i]=1;
+            if(buttons[i].getText() == "O") arr[i]=0;
+        }
+        return arr;
+    }
+        public int humanBotMoveWithIndex(JButton[] buttons){
+            // copy buttons arr and makeit an int arr with -1=empty,0=boimant move ,1=humanMove
+            Integer[] board=convertGuiBoardToInts(buttons);
+            
+        int fillPosition=-99;
+        List<Integer> emptySpaces = getAllEmptySpacesOnBoard(board);
+        System.out.println("Empty spaces are: ");
+        for(int i=0;i<emptySpaces.size();i++) System.out.print(emptySpaces.get(i)+ ", ");
+        System.out.println();
+        //check if its a winning move
+        for(int i=0;i<emptySpaces.size();i++){
+            Integer[] cp = copyBoard(board);
+            cp[emptySpaces.get(i)]=1;
+
+            if(isWinner(cp, 1) == true){
+                fillPosition = emptySpaces.get(i);
+            }
+        }
+
+        if(fillPosition!=-99){
+            board[fillPosition]=1;
+            return fillPosition;
+        }
+        emptySpaces = getAllEmptySpacesOnBoard(board);
+
+        //check for blocking opponent
+        for(int i=0;i<emptySpaces.size();i++){
+            Integer[] cp = copyBoard(board);
+            cp[emptySpaces.get(i)]=0;
+            if(isWinner(cp, 0) == true){
+                fillPosition = emptySpaces.get(i);
+            }
+        }
+
+        if(fillPosition!=-99){
+            board[fillPosition]=1;
+            return fillPosition;
+        }
+
+        // play centre
+        if(board[4]!=0 && board[4]==-1){
+            fillPosition=4;
+            board[fillPosition]=1;
+            return fillPosition;
+        }
+        emptySpaces = getAllEmptySpacesOnBoard(board);
+        printList(emptySpaces,"Empty spaces in before corners");
+
+        //play corners
+        List<Integer> corners = new ArrayList<>();
+        corners = checkCorners(emptySpaces);
+        printList(corners, "corners");
+        fillPosition = chooseRandomPosition(corners);
+        if(fillPosition!=-99) {
+            board[fillPosition] = 1;
+            return fillPosition;
+        }
+        emptySpaces = getAllEmptySpacesOnBoard(board);
+        printList(emptySpaces,"Empty spaces in after corners");
+
+        // play edges
+        List<Integer> edges = checkEdges(emptySpaces);
+        printList(edges, "edges");
+        fillPosition = chooseRandomPosition(edges);
+        if(fillPosition!=-99) {
+            board[fillPosition] = 1;
+            return fillPosition;
+        }
+        emptySpaces = getAllEmptySpacesOnBoard(board);
+    
+        return -1;
+        }
 }
