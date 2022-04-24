@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.UIManager;
 
 /**
  *
@@ -55,7 +56,6 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
         textField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         textField.setText("Game Status");
         textField.setDisabledTextColor(new java.awt.Color(255, 102, 255));
-        textField.setEnabled(false);
         textField.setOpaque(true);
         textField.setPreferredSize(new java.awt.Dimension(800, 800));
         textField.addActionListener(new java.awt.event.ActionListener() {
@@ -68,13 +68,13 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(textField, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(textField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         statusPanelLayout.setVerticalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(statusPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statusPanelLayout.createSequentialGroup()
                 .addComponent(textField, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -88,9 +88,9 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -124,9 +124,13 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
             if (e.getSource() == buttons[i]) {
                 if (player1_turn) {
                     if (buttons[i].getText() == "") {
-                        buttons[i].setForeground(new Color(255, 0, 0));
+                        buttons[i].setForeground(new Color(255, 0, 0));             
                         buttons[i].setText("X");
                         buttons[i].setEnabled(false);
+                        buttons[i].setBackground(Color.BLACK);
+                        buttons[i].setContentAreaFilled(false);
+                        buttons[i].setBorderPainted(false);
+                        buttons[i].setOpaque(true);
                         player1_turn = false;
                         //System.out.println(player1_turn);
                         textField.setText("O turn");
@@ -154,7 +158,11 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
                             checkfordraw();
                             buttons[index].setForeground(new Color(0, 0, 255));
                             buttons[index].setText("O");
-                            buttons[index].setEnabled(false);
+                            buttons[index].setEnabled(false);                       
+                            buttons[index].setBackground(Color.BLACK);
+                            buttons[index].setContentAreaFilled(false);
+                            buttons[index].setBorderPainted(false);
+                            buttons[index].setOpaque(true);
                             player1_turn = true;
                             textField.setText("X turn");
                             System.out.println(index);

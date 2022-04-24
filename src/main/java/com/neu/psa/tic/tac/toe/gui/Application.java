@@ -44,25 +44,37 @@ public class Application extends javax.swing.JFrame {
         setResizable(false);
 
         JPanel.setBackground(new java.awt.Color(0, 0, 0));
+        JPanel.setForeground(new java.awt.Color(0, 0, 0));
 
         splitPane.setBackground(new java.awt.Color(0, 0, 0));
         splitPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        splitPane.setDividerSize(1);
+        splitPane.setForeground(new java.awt.Color(0, 0, 0));
         splitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         splitPane.setMinimumSize(new java.awt.Dimension(300, 300));
 
         titlePanel.setBackground(new java.awt.Color(0, 0, 0));
+        titlePanel.setForeground(new java.awt.Color(0, 0, 0));
         titlePanel.setToolTipText("");
 
         textField.setEditable(false);
         textField.setBackground(new java.awt.Color(0, 0, 0));
         textField.setFont(new java.awt.Font("Helvetica Neue", 3, 120)); // NOI18N
-        textField.setForeground(new java.awt.Color(102, 102, 255));
+        textField.setForeground(new java.awt.Color(255, 102, 255));
         textField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         textField.setText("Tic Tac Toe");
+        textField.setBorder(null);
         textField.setCaretColor(new java.awt.Color(0, 0, 204));
-        textField.setDisabledTextColor(new java.awt.Color(255, 102, 255));
-        textField.setEnabled(false);
+        textField.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        textField.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        textField.setDoubleBuffered(true);
+        textField.setOpaque(true);
         textField.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        textField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
         titlePanel.setLayout(titlePanelLayout);
@@ -91,7 +103,7 @@ public class Application extends javax.swing.JFrame {
         );
         gamePanelLayout.setVerticalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 564, Short.MAX_VALUE)
+            .addGap(0, 568, Short.MAX_VALUE)
         );
 
         splitPane.setRightComponent(gamePanel);
@@ -102,6 +114,7 @@ public class Application extends javax.swing.JFrame {
 
         btnEasy.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
         btnEasy.setText("Easy");
+        btnEasy.setOpaque(true);
         btnEasy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEasyActionPerformed(evt);
@@ -175,6 +188,10 @@ public class Application extends javax.swing.JFrame {
         HumanStrategy human = new HumanStrategy();
 //        splitPane.setRightComponent(human);
     }//GEN-LAST:event_btnTrainActionPerformed
+
+    private void textFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldActionPerformed
 
     /**
      * @param args the command line arguments

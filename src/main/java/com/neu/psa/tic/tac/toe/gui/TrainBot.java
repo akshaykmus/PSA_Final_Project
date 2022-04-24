@@ -54,11 +54,10 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
         textField.setEditable(false);
         textField.setBackground(new java.awt.Color(0, 0, 0));
         textField.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
-        textField.setForeground(new java.awt.Color(102, 102, 255));
+        textField.setForeground(new java.awt.Color(255, 102, 255));
         textField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         textField.setText("Game Status");
         textField.setDisabledTextColor(new java.awt.Color(255, 102, 255));
-        textField.setEnabled(false);
         textField.setOpaque(true);
         textField.setPreferredSize(new java.awt.Dimension(800, 800));
         textField.addActionListener(new java.awt.event.ActionListener() {
@@ -75,9 +74,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
         );
         statusPanelLayout.setVerticalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(statusPanelLayout.createSequentialGroup()
-                .addComponent(textField, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(textField, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -91,9 +88,9 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,6 +130,10 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         buttons[i].setForeground(new Color(255, 0, 0));
                         buttons[i].setText("X");
                         buttons[i].setEnabled(false);
+                        buttons[i].setBackground(Color.BLACK);
+                        buttons[i].setContentAreaFilled(false);
+                        buttons[i].setBorderPainted(false);
+                        buttons[i].setOpaque(true);
                         player1_turn = false;
                         textField.setText("O turn");
                         check();
@@ -147,6 +148,10 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         buttons[index].setForeground(new Color(0, 0, 255));
                         buttons[index].setText("O");
                         buttons[index].setEnabled(false);
+                        buttons[index].setBackground(Color.BLACK);
+                        buttons[index].setContentAreaFilled(false);
+                        buttons[index].setBorderPainted(false);
+                        buttons[index].setOpaque(true);
                         player1_turn = true;
                         textField.setText("X turn");
                         move++;
