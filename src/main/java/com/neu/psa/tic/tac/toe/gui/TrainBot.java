@@ -119,7 +119,9 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
     // End of variables declaration//GEN-END:variables
 
     int move = 1;
-    List<Integer> playedPos = new ArrayList<>();
+    Integer[] playedPos = new Integer[9];
+    List<Integer[]> states = new ArrayList<>();
+    List<Integer> ranks = new ArrayList<>();
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -136,6 +138,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         buttons[i].setOpaque(true);
                         player1_turn = false;
                         textField.setText("O turn");
+                        playedPos[i] = 1;
                         check();
                         checkfordraw();
                     }
@@ -143,7 +146,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
 
                     TrainedMenace tm = new TrainedMenace();
                     List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
-                    int index = tm.menacemove(buttons, move, emptySpaces);
+                    int index = tm.menacemove(buttons, move, emptySpaces, playedPos);
                     if (buttons[index].getText() == "") {
                         buttons[index].setForeground(new Color(0, 0, 255));
                         buttons[index].setText("O");
@@ -155,17 +158,25 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         player1_turn = true;
                         textField.setText("X turn");
                         move++;
+                        playedPos[index] = -1;
+                        ranks.add(index);
+                        states.add(playedPos);
+                        for(int x=0;x<states.size();x++){
+                            System.out.println("See here!");
+                            Integer[] y = states.get(x);
+                            System.out.println();
+                            for(int j=0;j<y.length;j++) System.out.print(y[j]);
+                        }
                         check();
                         checkfordraw();
-                        playedPos.add(index);
 
                         if (textField.getText().equalsIgnoreCase("X wins")) {
                             System.err.println("X checkpoint reached");
-                            tm.punish(playedPos);
+                            tm.insertRewards("win", ranks, states);
                         }
                         if (textField.getText().equalsIgnoreCase("O wins")) {
                             System.err.println("O checkpoint reached");
-                            tm.reward(playedPos);
+                            tm.insertRewards("loss", ranks, states);
                         }
                     }
                 }

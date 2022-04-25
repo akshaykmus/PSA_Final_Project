@@ -19,7 +19,7 @@ public class HashTableFunctions {
     // Note: HashTable values (0-8) are initialised to 0.
     public Hashtable<Integer, Integer> crateNewHash() {
         Hashtable<Integer, Integer> ht1 = new Hashtable<>();
-        ht1.put(0, 3);
+        ht1.put(0, 0);
         ht1.put(1, 0);
         ht1.put(2, 0);
         ht1.put(3, 0);
@@ -29,6 +29,11 @@ public class HashTableFunctions {
         ht1.put(7, 0);
         ht1.put(8, 0);
         return ht1;
+    }
+    
+    public Hashtable<Integer[], Hashtable<Integer, Integer>> createNewHashOfHash() {
+        Hashtable<Integer[], Hashtable<Integer, Integer>> newHT = new Hashtable<>();
+        return newHT;
     }
 
     public Hashtable<Integer, Integer> updateHashTable(Hashtable<Integer, Integer> ht, List<Integer> positions, Integer points) {

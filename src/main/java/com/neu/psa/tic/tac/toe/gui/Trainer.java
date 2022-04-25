@@ -37,7 +37,7 @@ public class Trainer extends javax.swing.JPanel {
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                markPosition();
+//                markPosition();
 //                System.out.println("hello");
 //                textField.setText("mayank turn "+i);
 //                i++;
@@ -164,65 +164,65 @@ public class Trainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldActionPerformed
 
-    private void markPosition() {
-        System.out.println("inside mark positon");
-        for (int i = 0; i < 9; i++) {
-            // add hStrategy move (INDEX) here
-            HumanStrategy hs = new HumanStrategy();
-            int index1 = hs.humanBotMoveWithIndex(buttons);
-            System.out.println("inside mark positon index "+index1);
-            if (index1 < 0) {
-                return;
-            }
-            // if (e.getSource() == buttons[index1]) {
-            if (player1_turn) {
-
-                if (buttons[index1].getText() == "") {
-                    buttons[index1].setForeground(new Color(255, 0, 0));
-                    buttons[index1].setText("X");
-                    buttons[index1].setEnabled(false);
-                    buttons[index1].setBackground(Color.BLACK);
-                    buttons[index1].setContentAreaFilled(false);
-                    buttons[index1].setBorderPainted(false);
-                    buttons[index1].setOpaque(true);
-                    player1_turn = false;
-                    textField.setText("O turn");
-                    if(check()) return;
-                    if(checkfordraw()) return;
-                }
-//                } else {
-
-                TrainedMenace tm = new TrainedMenace();
-                List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
-                int index = tm.menacemove(buttons, move, emptySpaces);
-                if (buttons[index].getText() == "") {
-                    buttons[index].setForeground(new Color(0, 0, 255));
-                    buttons[index].setText("O");
-                    buttons[index].setEnabled(false);
-                    buttons[index].setBackground(Color.BLACK);
-                    buttons[index].setContentAreaFilled(false);
-                    buttons[index].setBorderPainted(false);
-                    buttons[index].setOpaque(true);
-                    player1_turn = true;
-                    textField.setText("X turn");
-                    move++;
-                    if(check()) return;
-                    if(checkfordraw()) return;
-                    playedPos.add(index);
-
-                    if (textField.getText().equalsIgnoreCase("X wins")) {
-                        System.err.println("X checkpoint reached");
-                        tm.punish(playedPos);
-                    }
-                    if (textField.getText().equalsIgnoreCase("O wins")) {
-                        System.err.println("O checkpoint reached");
-                        tm.reward(playedPos);
-                    }
-                }
-            }
-        }
-        //  }
-    }
+//    private void markPosition() {
+//        System.out.println("inside mark positon");
+//        for (int i = 0; i < 9; i++) {
+//            // add hStrategy move (INDEX) here
+//            HumanStrategy hs = new HumanStrategy();
+//            int index1 = hs.humanBotMoveWithIndex(buttons);
+//            System.out.println("inside mark positon index "+index1);
+//            if (index1 < 0) {
+//                return;
+//            }
+//            // if (e.getSource() == buttons[index1]) {
+//            if (player1_turn) {
+//
+//                if (buttons[index1].getText() == "") {
+//                    buttons[index1].setForeground(new Color(255, 0, 0));
+//                    buttons[index1].setText("X");
+//                    buttons[index1].setEnabled(false);
+//                    buttons[index1].setBackground(Color.BLACK);
+//                    buttons[index1].setContentAreaFilled(false);
+//                    buttons[index1].setBorderPainted(false);
+//                    buttons[index1].setOpaque(true);
+//                    player1_turn = false;
+//                    textField.setText("O turn");
+//                    if(check()) return;
+//                    if(checkfordraw()) return;
+//                }
+////                } else {
+//
+//                TrainedMenace tm = new TrainedMenace();
+//                List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
+//                int index = tm.menacemove(buttons, move, emptySpaces);
+//                if (buttons[index].getText() == "") {
+//                    buttons[index].setForeground(new Color(0, 0, 255));
+//                    buttons[index].setText("O");
+//                    buttons[index].setEnabled(false);
+//                    buttons[index].setBackground(Color.BLACK);
+//                    buttons[index].setContentAreaFilled(false);
+//                    buttons[index].setBorderPainted(false);
+//                    buttons[index].setOpaque(true);
+//                    player1_turn = true;
+//                    textField.setText("X turn");
+//                    move++;
+//                    if(check()) return;
+//                    if(checkfordraw()) return;
+//                    playedPos.add(index);
+//
+//                    if (textField.getText().equalsIgnoreCase("X wins")) {
+//                        System.err.println("X checkpoint reached");
+////                        tm.punish(playedPos);
+//                    }
+//                    if (textField.getText().equalsIgnoreCase("O wins")) {
+//                        System.err.println("O checkpoint reached");
+////                        tm.reward(playedPos);
+//                    }
+//                }
+//            }
+//        }
+//        //  }
+//    }
 
     private void createGridButtons() {
         for (int i = 0; i < 9; i++) {

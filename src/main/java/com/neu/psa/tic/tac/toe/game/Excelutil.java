@@ -59,4 +59,36 @@ public class Excelutil {
         //System.out.print(value);
     }
 
+    public static double getValueFromStatesData(int moveNumber,int position, int value2) {
+        
+        double value = 0;
+        try {
+            String path = "./src/main/java/com/neu/psa/tic/tac/toe/game/ExcelUtils/data.xlsx";
+            XSSFWorkbook work = new XSSFWorkbook(path);
+            if(moveNumber==1){
+                XSSFSheet sheet = work.getSheet("Sheet1");
+            value = sheet.getRow(position).getCell(value2).getNumericCellValue();
+            } else if(moveNumber==2) {
+                XSSFSheet sheet = work.getSheet("Sheet2");
+            value = sheet.getRow(position).getCell(value2).getNumericCellValue();
+            } else if(moveNumber==3) {
+            XSSFSheet sheet = work.getSheet("Sheet3");
+            value = sheet.getRow(position).getCell(value2).getNumericCellValue();
+            } else if(moveNumber==4) {
+                XSSFSheet sheet = work.getSheet("Sheet4");
+            value = sheet.getRow(position).getCell(value2).getNumericCellValue();
+            } else if(moveNumber==5) {
+                XSSFSheet sheet = work.getSheet("Sheet5");
+            value = sheet.getRow(position).getCell(value2).getNumericCellValue();
+            }
+            
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        //System.out.print(value);
+        return value;
+    }
+   
 }
