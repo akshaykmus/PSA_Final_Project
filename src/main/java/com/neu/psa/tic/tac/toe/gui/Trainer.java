@@ -187,8 +187,8 @@ public class Trainer extends javax.swing.JPanel {
                     buttons[index1].setOpaque(true);
                     player1_turn = false;
                     textField.setText("O turn");
-                    check();
-                    checkfordraw();
+                    if(check()) return;
+                    if(checkfordraw()) return;
                 }
 //                } else {
 
@@ -206,8 +206,8 @@ public class Trainer extends javax.swing.JPanel {
                     player1_turn = true;
                     textField.setText("X turn");
                     move++;
-                    check();
-                    checkfordraw();
+                    if(check()) return;
+                    if(checkfordraw()) return;
                     playedPos.add(index);
 
                     if (textField.getText().equalsIgnoreCase("X wins")) {
@@ -355,7 +355,7 @@ public class Trainer extends javax.swing.JPanel {
         }
     }
 
-    public void checkfordraw() {
+    public boolean checkfordraw() {
         if ((buttons[0].getText() != "")
                 && (buttons[1].getText() != "")
                 && (buttons[2].getText() != "")
@@ -368,7 +368,10 @@ public class Trainer extends javax.swing.JPanel {
                 && (check() == false)) {
 
             itsdraw();
+            
+            return true;
         }
+        return false;
     }
 
     public void xWins(int a, int b, int c) {
