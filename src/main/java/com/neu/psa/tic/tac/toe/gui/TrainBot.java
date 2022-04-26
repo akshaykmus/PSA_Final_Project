@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JButton;
 
@@ -143,7 +144,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         checkfordraw();
                     }
 //                } else {
-
+                     if (!boardFull()) {
                     TrainedMenace tm = new TrainedMenace();
                     List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
                     int index = tm.menacemove(buttons, move, emptySpaces, playedPos);
@@ -160,23 +161,32 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         move++;
                         playedPos[index] = -1;
                         ranks.add(index);
-                        states.add(playedPos);
+                        Integer[] tempPlayedPos = new Integer[playedPos.length];
+                        for(int z=0;z<playedPos.length;z++) tempPlayedPos[z]=playedPos[z];
+                        states.add(tempPlayedPos);
+
                         for(int x=0;x<states.size();x++){
-                            System.out.println("See here!");
+                            System.out.println("Printing index: "+x);
                             Integer[] y = states.get(x);
+                          
                             System.out.println();
                             for(int j=0;j<y.length;j++) System.out.print(y[j]);
+                            System.out.println();
                         }
                         check();
                         checkfordraw();
+                    }
+                    check();
+                    checkfordraw();
+                    
 
                         if (textField.getText().equalsIgnoreCase("X wins")) {
                             System.err.println("X checkpoint reached");
-                            tm.insertRewards("win", ranks, states);
+                            tm.insertRewards("loss", ranks, states);
                         }
                         if (textField.getText().equalsIgnoreCase("O wins")) {
                             System.err.println("O checkpoint reached");
-                            tm.insertRewards("loss", ranks, states);
+                            tm.insertRewards("win", ranks, states);
                         }
                     }
                 }
@@ -362,4 +372,22 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
 //            textfield.setText("O turn");
 //        }
     }
+    public boolean boardFull() {
+        int i;
+        int a = 0;
+        for (i = 0; i < 9; i++) {
+            if (buttons[i].getText() != "") {
+                a++;
+//              continue;      
+            }
+            //return true; 
+        }
+        if (a == 9) {
+            System.out.println(a);
+            return true;
+        }
+
+        return false;
+    }
 }
+
