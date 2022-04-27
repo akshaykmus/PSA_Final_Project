@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.Timer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -25,6 +27,7 @@ import javax.swing.Timer;
  */
 public class Trainer extends javax.swing.JPanel {
 
+    private static final Logger log = LogManager.getLogger(Trainer.class);
     JButton[] buttons = new JButton[9];
     boolean player1_turn = true;
     int i = 0;
@@ -196,6 +199,11 @@ public class Trainer extends javax.swing.JPanel {
                         buttons[i].setEnabled(false);
                     }
                     System.err.println("X checkpoint reached");
+                    String rankPos = "";
+                    for (int j = 0; j < pHT.ranks.size(); j++) {
+                        rankPos = rankPos + " " + String.valueOf(pHT.ranks.get(j));
+                    }
+                    log.info("\nStatus = Human Wins" + "\nbeta = 3 added to positions " + rankPos);
                     tm.insertRewards(pHT, "loss", pHT.ranks, pHT.states);
                     return;
 
@@ -205,6 +213,12 @@ public class Trainer extends javax.swing.JPanel {
                         buttons[i].setEnabled(false);
                     }
                     System.err.println("O checkpoint reached");
+                    String rankPos = " ";
+                    for (int j = 0; j < pHT.ranks.size(); j++) {
+                        rankPos = rankPos + " " + String.valueOf(pHT.ranks.get(j));
+                    }
+                    System.out.println(rankPos);
+                    log.info("\nStatus = Bot Wins" + " \ngamma = -1 added to positions " + rankPos);
                     tm.insertRewards(pHT, "win", pHT.ranks, pHT.states);
                     return;
                 }
@@ -213,6 +227,11 @@ public class Trainer extends javax.swing.JPanel {
                         buttons[i].setEnabled(false);
                     }
                     System.err.println("Draw checkpoint reached");
+                    String rankPos = "";
+                    for (int j = 0; j < pHT.ranks.size(); j++) {
+                        rankPos = rankPos + " " + String.valueOf(pHT.ranks.get(j));
+                    }
+                    log.info("\nStatus = Its a Draw" + "\ndelta = 2 added to positions " + rankPos);
                     tm.insertRewards(pHT, "draw", pHT.ranks, pHT.states);
                     return;
                 }
