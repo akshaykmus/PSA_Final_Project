@@ -39,7 +39,7 @@ public class TrainedMenace implements Serializable {
 //    public Hashtable<Integer[], Hashtable<Integer, Integer>> ht5 = h.createNewHashOfHash();
 
     public void init() {
-        
+//        
 //        writeObjectToFile(1,new Score());
 //        writeObjectToFile(2,new Score());
 //        writeObjectToFile(3,new Score());
@@ -122,7 +122,7 @@ public class TrainedMenace implements Serializable {
     public ParentHT menacemove(ParentHT pHT, JButton[] buttons, int move, List<Integer> empty,Integer[] playedPos) {
 //        ParentHT pHT = new ParentHT();
         int key = -1;
-//        init(); // read from file
+//         init(); // read from file
 //       pHT.ht1 = readObjectFromFile(1);
 //        pHT.ht2 = readObjectFromFile(2);
 //        pHT.ht3 = readObjectFromFile(3);
@@ -180,16 +180,17 @@ pHT.index=key;
 //        pHT.ht4 = readObjectFromFile(4);
         insertPointsToHashTable(1, states.get(0), pHT.ht1, s, ranks.get(0));
         insertPointsToHashTable(2, states.get(1), pHT.ht2, s, ranks.get(1));
+           
+        System.out.println("HASTABLE 1");
+        verifyHashTables(pHT.ht1);
+        System.out.println("HASTABLE 2");
+        verifyHashTables(pHT.ht2);
         if (states.size() >= 3) {
             System.out.println("HASTABLE 3");
             insertPointsToHashTable(3, states.get(2), pHT.ht3, s, ranks.get(2));
             verifyHashTables(pHT.ht3);
         }
-        
-        System.out.println("HASTABLE 1");
-        verifyHashTables(pHT.ht1);
-        System.out.println("HASTABLE 2");
-        verifyHashTables(pHT.ht2);
+     
 //        System.out.println("HASTABLE 3");
 //        verifyHashTables(pHT.ht3);
         if (states.size() >= 4) {
@@ -312,6 +313,14 @@ pHT.index=key;
             Score obj = new Score();
             obj = convertHTtoObj(ht);
 
+            writeObjectToFile(moveNumber, obj);
+        }
+        if (s == "draw") {
+            Hashtable<Integer, Integer> ht123 = ht.get(state);
+            ht123.put(rank, ht123.get(rank) + 2);
+            ht.put(state, ht123);
+            Score obj = new Score();
+            obj = convertHTtoObj(ht);
             writeObjectToFile(moveNumber, obj);
         }
 

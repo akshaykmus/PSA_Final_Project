@@ -124,12 +124,11 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
 //    Integer[] playedPos = new Integer[9];
 //    List<Integer[]> states = new ArrayList<>();
 //    List<Integer> ranks = new ArrayList<>();   
- ParentHT pHT = new ParentHT();
- 
-        
+    ParentHT pHT = new ParentHT();
+    TrainedMenace tm = new TrainedMenace();
     @Override
     public void actionPerformed(ActionEvent e) {
- 
+
         for (int i = 0; i < 9; i++) {
             if (e.getSource() == buttons[i]) {
                 if (player1_turn) {
@@ -145,31 +144,36 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         textField.setText("O turn");
                         pHT.playedPos[i] = 1;
                         String tempPlayedPos = ""; //new Integer[pHT.playedPos.length];
-                       for(int z=0;z<pHT.playedPos.length;z++) tempPlayedPos = tempPlayedPos + String.valueOf(pHT.playedPos[z]);
-                         pHT.states.add(tempPlayedPos);
+                        if (!check() && !checkfordraw()) {
+                        for (int z = 0; z < pHT.playedPos.length; z++) {
+                            tempPlayedPos = tempPlayedPos + String.valueOf(pHT.playedPos[z]);
+                        }
+                        pHT.states.add(tempPlayedPos);
+                        }
                         check();
                         checkfordraw();
                     }
 //                } else {
-                     if (!boardFull()&&!check()&&!checkfordraw()) {
-                    TrainedMenace tm = new TrainedMenace();
-                    List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
+
+                    if (!boardFull() && !check() && !checkfordraw()) {
                         
-                           pHT = tm.menacemove(pHT,buttons, pHT.move, emptySpaces, pHT.playedPos);
-                            int index= pHT.index;
-                    if (buttons[index].getText() == "") {
-                        buttons[index].setForeground(new Color(0, 0, 255));
-                        buttons[index].setText("O");
-                        buttons[index].setEnabled(false);
-                        buttons[index].setBackground(Color.BLACK);
-                        buttons[index].setContentAreaFilled(false);
-                        buttons[index].setBorderPainted(false);
-                        buttons[index].setOpaque(true);
-                        player1_turn = true;
-                        textField.setText("X turn");
-                        pHT.move = pHT.move+1;
-                        pHT.playedPos[index] = -1;
-                        pHT.ranks.add(index);
+                        List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
+
+                        pHT = tm.menacemove(pHT, buttons, pHT.move, emptySpaces, pHT.playedPos);
+                        int index = pHT.index;
+                        if (buttons[index].getText() == "") {
+                            buttons[index].setForeground(new Color(0, 0, 255));
+                            buttons[index].setText("O");
+                            buttons[index].setEnabled(false);
+                            buttons[index].setBackground(Color.BLACK);
+                            buttons[index].setContentAreaFilled(false);
+                            buttons[index].setBorderPainted(false);
+                            buttons[index].setOpaque(true);
+                            player1_turn = true;
+                            textField.setText("X turn");
+                            pHT.move = pHT.move + 1;
+                            pHT.playedPos[index] = -1;
+                            pHT.ranks.add(index);
 //                        Integer[] tempPlayedPos = new Integer[playedPos.length];
 //                        for(int z=0;z<playedPos.length;z++) tempPlayedPos[z]=playedPos[z];
 //                        states.add(tempPlayedPos);
@@ -182,22 +186,27 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
 //                            for(int j=0;j<y.length;j++) System.out.print(y[j]);
 //                            System.out.println();
 //                        }
-                        check();
-                        checkfordraw();
+                            check();
+                            checkfordraw();
+                        }
                     }
                     check();
                     checkfordraw();
-                    
-                       
-                        if (textField.getText().equalsIgnoreCase("X wins")) {
-                            System.err.println("X checkpoint reached");
-                            tm.insertRewards(pHT,"loss", pHT.ranks, pHT.states);
-                        }
-                        if (textField.getText().equalsIgnoreCase("O wins")) {
-                            System.err.println("O checkpoint reached");
-                            tm.insertRewards(pHT,"win", pHT.ranks, pHT.states);
-                        }
+
+                    if (textField.getText().equalsIgnoreCase("X wins")) {
+                        System.err.println("X checkpoint reached");
+                        tm.insertRewards(pHT, "loss", pHT.ranks, pHT.states);
                     }
+                    if (textField.getText().equalsIgnoreCase("O wins")) {
+                        System.err.println("O checkpoint reached");
+                        tm.insertRewards(pHT, "win", pHT.ranks, pHT.states);
+                    }
+                    if (textField.getText().equalsIgnoreCase("Its a Draw")) {
+                        System.err.println("Draw checkpoint reached");
+                        tm.insertRewards(pHT, "draw", pHT.ranks, pHT.states);
+                    }
+
+
                 }
             }
         }
@@ -322,7 +331,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
             return true;
         }
         return false;
-        
+
     }
 
     public void xWins(int a, int b, int c) {
@@ -384,6 +393,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
 //            textfield.setText("O turn");
 //        }
     }
+
     public boolean boardFull() {
         int i;
         int a = 0;
@@ -402,4 +412,3 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
         return false;
     }
 }
-
