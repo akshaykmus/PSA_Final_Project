@@ -123,12 +123,9 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 
-//        int move = 1;
-//    Integer[] playedPos = new Integer[9];
-//    List<Integer[]> states = new ArrayList<>();
-//    List<Integer> ranks = new ArrayList<>();   
     ParentHT pHT = new ParentHT();
     TrainedMenace tm = new TrainedMenace();
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -148,18 +145,17 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         pHT.playedPos[i] = 1;
                         String tempPlayedPos = ""; //new Integer[pHT.playedPos.length];
                         if (!check() && !checkfordraw()) {
-                        for (int z = 0; z < pHT.playedPos.length; z++) {
-                            tempPlayedPos = tempPlayedPos + String.valueOf(pHT.playedPos[z]);
-                        }
-                        pHT.states.add(tempPlayedPos);
+                            for (int z = 0; z < pHT.playedPos.length; z++) {
+                                tempPlayedPos = tempPlayedPos + String.valueOf(pHT.playedPos[z]);
+                            }
+                            pHT.states.add(tempPlayedPos);
                         }
                         check();
                         checkfordraw();
                     }
-//                } else {
 
                     if (!boardFull() && !check() && !checkfordraw()) {
-                        
+
                         List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
 
                         pHT = tm.menacemove(pHT, buttons, pHT.move, emptySpaces, pHT.playedPos);
@@ -177,18 +173,6 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                             pHT.move = pHT.move + 1;
                             pHT.playedPos[index] = -1;
                             pHT.ranks.add(index);
-//                        Integer[] tempPlayedPos = new Integer[playedPos.length];
-//                        for(int z=0;z<playedPos.length;z++) tempPlayedPos[z]=playedPos[z];
-//                        states.add(tempPlayedPos);
-
-//                        for(int x=0;x<pHT.states.size();x++){
-//                            System.out.println("Printing index: "+x);
-//                            Integer[] y = pHT.states.get(x);
-//                          
-//                            System.out.println();
-//                            for(int j=0;j<y.length;j++) System.out.print(y[j]);
-//                            System.out.println();
-//                        }
                             check();
                             checkfordraw();
                         }
@@ -227,8 +211,6 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         log.info("Status = Its a Draw"+"\ndelta = 2 added to positions "+ rankPos);
                         tm.insertRewards(pHT, "draw", pHT.ranks, pHT.states);
                     }
-
-
                 }
             }
         }
@@ -353,7 +335,6 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
             return true;
         }
         return false;
-
     }
 
     public void xWins(int a, int b, int c) {
@@ -364,7 +345,6 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-
         textField.setText("X wins");
     }
 
@@ -376,7 +356,6 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-
         textField.setText("O wins");
     }
 
@@ -384,7 +363,6 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-
         textField.setText("Its a Draw");
     }
 
@@ -406,14 +384,6 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-//        if (random.nextInt(2) == 0) {
-//            player1_turn = true;
-//            textfield.setText("X turn");
-//        } else {
-//            player1_turn = false;
-//            textfield.setText("O turn");
-//        }
     }
 
     public boolean boardFull() {
@@ -422,15 +392,12 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
         for (i = 0; i < 9; i++) {
             if (buttons[i].getText() != "") {
                 a++;
-//              continue;      
             }
-            //return true; 
         }
         if (a == 9) {
             System.out.println(a);
             return true;
         }
-
         return false;
     }
 }
