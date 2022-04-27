@@ -152,7 +152,7 @@ public class Trainer extends javax.swing.JPanel {
                     buttons[index1].setBorderPainted(false);
                     buttons[index1].setOpaque(true);
                     player1_turn = false;
-                    textField.setText("O turn");
+                    //textField.setText("O turn");
                     pHT.playedPos[i] = 1;
 
                     if (!check() && !checkfordraw()) {
@@ -193,7 +193,7 @@ public class Trainer extends javax.swing.JPanel {
                         buttons[index].setBorderPainted(false);
                         buttons[index].setOpaque(true);
                         player1_turn = true;
-                        textField.setText("X turn");
+                        //textField.setText("X turn");
                         pHT.move = pHT.move + 1;
                         pHT.playedPos[index] = -1;
                         pHT.ranks.add(index);
