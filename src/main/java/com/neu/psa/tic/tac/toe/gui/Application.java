@@ -3,7 +3,10 @@ package com.neu.psa.tic.tac.toe.gui;
 import com.neu.psa.tic.tac.toe.game.HumanStrategy;
 import java.awt.Color;
 import java.awt.Font;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javax.swing.JButton;
+import org.apache.logging.log4j.Level;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,11 +19,14 @@ import javax.swing.JButton;
  * @author vidhi
  */
 public class Application extends javax.swing.JFrame {
-
+    
+    private static final Logger log = LogManager.getLogger(Application.class);
+    
     /**
      * Creates new form Applications
      */
     public Application() {
+        log.info("inside application log");
         initComponents();
     }
 
