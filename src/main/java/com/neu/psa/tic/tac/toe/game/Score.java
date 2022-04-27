@@ -6,6 +6,6 @@ import java.util.List;
 
 
 public class Score implements Serializable {
-    public List<Integer[]> states = new ArrayList<>();
+    public List<String> states = new ArrayList<>();
     public List<Integer[]> scores = new ArrayList<>();
 }

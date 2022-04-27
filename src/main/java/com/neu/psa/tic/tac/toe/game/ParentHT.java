@@ -15,15 +15,15 @@ import java.util.List;
 public class ParentHT {
     TrainedMenace tm = new TrainedMenace();
       
-    public Hashtable<Integer[], Hashtable<Integer, Integer>> ht1 =  tm.readObjectFromFile(1);
-    public Hashtable<Integer[], Hashtable<Integer, Integer>> ht2 =  tm.readObjectFromFile(2);
-    public Hashtable<Integer[], Hashtable<Integer, Integer>> ht3 = tm.readObjectFromFile(3);
-    public Hashtable<Integer[], Hashtable<Integer, Integer>> ht4 = tm.readObjectFromFile(4);
+    public Hashtable<String, Hashtable<Integer, Integer>> ht1 =  tm.readObjectFromFile(1);
+    public Hashtable<String, Hashtable<Integer, Integer>> ht2 =  tm.readObjectFromFile(2);
+    public Hashtable<String, Hashtable<Integer, Integer>> ht3 = tm.readObjectFromFile(3);
+    public Hashtable<String, Hashtable<Integer, Integer>> ht4 = tm.readObjectFromFile(4);
     public int index=-99;
     
     public int move = 1;
    public  Integer[] playedPos = new Integer[9];
-   public  List<Integer[]> states = new ArrayList<>();
+   public  List<String> states = new ArrayList<>();
   public  List<Integer> ranks = new ArrayList<>();
     
 }

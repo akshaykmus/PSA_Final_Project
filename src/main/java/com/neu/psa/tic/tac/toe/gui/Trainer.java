@@ -7,6 +7,7 @@ package com.neu.psa.tic.tac.toe.gui;
 
 import com.neu.psa.tic.tac.toe.game.EasyMenace;
 import com.neu.psa.tic.tac.toe.game.HumanStrategy;
+import com.neu.psa.tic.tac.toe.game.ParentHT;
 import com.neu.psa.tic.tac.toe.game.TrainedMenace;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,73 +27,22 @@ public class Trainer extends javax.swing.JPanel {
 
     JButton[] buttons = new JButton[9];
     boolean player1_turn = true;
-    int i=0;
+    int i = 0;
 
     /**
      * Creates new form NaiveBotPanel
      */
+    ParentHT pHT = new ParentHT();
+
     public Trainer() {
         initComponents();
         createGridButtons();
         Timer timer = new Timer(1000, new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 markPosition();
-//                System.out.println("hello");
-//                textField.setText("mayank turn "+i);
-//                i++;
-                
-//        for (int i = 0; i < 9; i++) {
-//            // add hStrategy move (INDEX) here
-//             HumanStrategy hs = new HumanStrategy();
-//             int index1=hs.humanBotMoveWithIndex(buttons);
-//            if (e.getSource() == buttons[index1]) {
-//                if (player1_turn) {
-//                   
-//                    if (buttons[index1].getText() == "") {
-//                        buttons[index1].setForeground(new Color(255, 0, 0));
-//                        buttons[index1].setText("X");
-//                        buttons[index1].setEnabled(false);
-//                        buttons[index1].setBackground(Color.BLACK);
-//                        buttons[index1].setContentAreaFilled(false);
-//                        buttons[index1].setBorderPainted(false);
-//                        buttons[index1].setOpaque(true);
-//                        player1_turn = false;
-//                        textField.setText("O turn");
-//                        check();
-//                        checkfordraw();
-//                    }
-////                } else {
-//
-//                    TrainedMenace tm = new TrainedMenace();
-//                    List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
-//                    int index = tm.menacemove(buttons, move, emptySpaces);
-//                    if (buttons[index].getText() == "") {
-//                        buttons[index].setForeground(new Color(0, 0, 255));
-//                        buttons[index].setText("O");
-//                        buttons[index].setEnabled(false);
-//                        buttons[index].setBackground(Color.BLACK);
-//                        buttons[index].setContentAreaFilled(false);
-//                        buttons[index].setBorderPainted(false);
-//                        buttons[index].setOpaque(true);
-//                        player1_turn = true;
-//                        textField.setText("X turn");
-//                        move++;
-//                        check();
-//                        checkfordraw();
-//                        playedPos.add(index);
-//
-//                        if (textField.getText().equalsIgnoreCase("X wins")) {
-//                            System.err.println("X checkpoint reached");
-//                            tm.punish(playedPos);
-//                        }
-//                        if (textField.getText().equalsIgnoreCase("O wins")) {
-//                            System.err.println("O checkpoint reached");
-//                            tm.reward(playedPos);
-//                        }
-//                    }
-//                }
-//            }
+
             }
         });
 
@@ -164,23 +114,35 @@ public class Trainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldActionPerformed
 
-     Integer[] playedPos = new Integer[9];
-    List<Integer[]> states = new ArrayList<>();
-    List<Integer> ranks = new ArrayList<>();
-    
+//     Integer[] playedPos = new Integer[9];
+//    List<Integer[]> states = new ArrayList<>();
+//    List<Integer> ranks = new ArrayList<>();
     private void markPosition() {
+        TrainedMenace tm = new TrainedMenace();
         System.out.println("inside mark positon");
         for (int i = 0; i < 9; i++) {
             // add hStrategy move (INDEX) here
             HumanStrategy hs = new HumanStrategy();
-            int index1 = hs.humanBotMoveWithIndex(buttons);
-            System.out.println("inside mark positon index "+index1);
+            int index1 = 0;
+            List<Integer> emptySpaces2 = getAllEmptySpacesOnBoard(buttons);
+            if (pHT.move == 1 || pHT.move == 3) {
+                //random
+                EasyMenace eM = new EasyMenace();
+                index1 = eM.easyMove(buttons);
+                while (emptySpaces2.contains(index1) == false) {
+                    index1 = eM.easyMove(buttons);
+                }
+
+            } else {
+                index1 = hs.humanBotMoveWithIndex(buttons);
+            }
+//             index1 = hs.humanBotMoveWithIndex(buttons);
+            System.out.println("inside mark positon index " + index1);
             if (index1 < 0) {
                 return;
             }
             // if (e.getSource() == buttons[index1]) {
-            if (player1_turn) {
-
+            if (player1_turn&&!boardFull() && !check() && !checkfordraw()) {
                 if (buttons[index1].getText() == "") {
                     buttons[index1].setForeground(new Color(255, 0, 0));
                     buttons[index1].setText("X");
@@ -191,60 +153,100 @@ public class Trainer extends javax.swing.JPanel {
                     buttons[index1].setOpaque(true);
                     player1_turn = false;
                     textField.setText("O turn");
-                    if(check()) return;
-                    if(checkfordraw()) return;
+                    pHT.playedPos[i] = 1;
+
+                    if (!check() && !checkfordraw()) {
+                        String tempPlayedPos = ""; //new Integer[pHT.playedPos.length];
+                        for (int z = 0; z < pHT.playedPos.length; z++) {
+                            tempPlayedPos = tempPlayedPos + String.valueOf(pHT.playedPos[z]);
+                        }
+                        pHT.states.add(tempPlayedPos);
+                    }
+
+                    check();
+                    checkfordraw();
+
+//                    if (textField.getText().equalsIgnoreCase("X wins")) {
+//                        System.err.println("X checkpoint reached");
+//                        tm.insertRewards(pHT, "loss", pHT.ranks, pHT.states);
+//                        return;
+//
+//                    }
+//                    if (textField.getText().equalsIgnoreCase("O wins")) {
+//                        System.err.println("O checkpoint reached");
+//                        tm.insertRewards(pHT, "win", pHT.ranks, pHT.states);
+//                        return;
+//                    }
                 }
 //                } else {
+                if (!boardFull() && !check() && !checkfordraw()) {
+                    //&&!check()&&!checkfordraw()
+                    List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
+                    pHT = tm.menacemove(pHT, buttons, pHT.move, emptySpaces, pHT.playedPos);
+                    int index = pHT.index;
+                    if (buttons[index].getText() == "") {
+                        buttons[index].setForeground(new Color(0, 0, 255));
+                        buttons[index].setText("O");
+                        buttons[index].setEnabled(false);
+                        buttons[index].setBackground(Color.BLACK);
+                        buttons[index].setContentAreaFilled(false);
+                        buttons[index].setBorderPainted(false);
+                        buttons[index].setOpaque(true);
+                        player1_turn = true;
+                        textField.setText("X turn");
+                        pHT.move = pHT.move + 1;
+                        pHT.playedPos[index] = -1;
+                        pHT.ranks.add(index);
+//                            for (int x = 0; x < states.size(); x++) {
+//                                System.out.println("Printing index: " + x);
+//                                Integer[] y = states.get(x);
+//                                System.out.println();
+//                                for (int j = 0; j < y.length; j++) {
+//                                    System.out.print(y[j]);
+//                                }
+//                                System.out.println();
+//                            }
+                        check();
+                        checkfordraw();
+                    }
+                    check();
+                    checkfordraw();
 
-                TrainedMenace tm = new TrainedMenace();
-                List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
-                     int index = tm.menacemove(buttons, move, emptySpaces, playedPos);
-                if (buttons[index].getText() == "") {
-                    buttons[index].setForeground(new Color(0, 0, 255));
-                    buttons[index].setText("O");
-                    buttons[index].setEnabled(false);
-                    buttons[index].setBackground(Color.BLACK);
-                    buttons[index].setContentAreaFilled(false);
-                    buttons[index].setBorderPainted(false);
-                    buttons[index].setOpaque(true);
-                    player1_turn = true;
-                    textField.setText("X turn");
-                    move++;
-                     playedPos[index] = -1;
-                        ranks.add(index);
-                        Integer[] tempPlayedPos = new Integer[playedPos.length];
-                        for(int z=0;z<playedPos.length;z++) tempPlayedPos[z]=playedPos[z];
-                        states.add(tempPlayedPos);
-                        
-                          for(int x=0;x<states.size();x++){
-                            System.out.println("Printing index: "+x);
-                            Integer[] y = states.get(x);
-                          
-                            System.out.println();
-                            for(int j=0;j<y.length;j++) System.out.print(y[j]);
-                            System.out.println();
-                        }
-                    if(check()) {
-                        if (textField.getText().equalsIgnoreCase("X wins")) {
-                        System.err.println("X checkpoint reached");
-                        tm.insertRewards("loss", ranks, states);
-                    }
-                    if (textField.getText().equalsIgnoreCase("O wins")) {
-                        System.err.println("O checkpoint reached");
-                       tm.insertRewards("win", ranks, states);
-                    }
-                        return;
-                    }
-                    if(checkfordraw()) {
-                        
-                        return;
-                    }
+//                    if (textField.getText().equalsIgnoreCase("X wins")) {
+//                        System.err.println("X checkpoint reached");
+//                        tm.insertRewards(pHT, "loss", pHT.ranks, pHT.states);
+//                        return;
+//
+//                    }
+//                    if (textField.getText().equalsIgnoreCase("O wins")) {
+//                        System.err.println("O checkpoint reached");
+//                        tm.insertRewards(pHT, "win", pHT.ranks, pHT.states);
+//                        return;
+//                    }
+                }
 
-                    
+                check();
+                checkfordraw();
+                if (textField.getText().equalsIgnoreCase("X wins")) {
+                    for (int q = 0; q < 9; q++) {
+                        buttons[i].setEnabled(false);
+                    }
+                    System.err.println("X checkpoint reached");
+                    tm.insertRewards(pHT, "loss", pHT.ranks, pHT.states);
+                    return;
+
+                }
+                if (textField.getText().equalsIgnoreCase("O wins")) {
+                    for (int w = 0; w < 9; w++) {
+                        buttons[i].setEnabled(false);
+                    }
+                    System.err.println("O checkpoint reached");
+                    tm.insertRewards(pHT, "win", pHT.ranks, pHT.states);
+                    return;
+
                 }
             }
         }
-        //  }
     }
 
     private void createGridButtons() {
@@ -265,7 +267,7 @@ public class Trainer extends javax.swing.JPanel {
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 
-    int move = 1;
+//    int move = 1;
 //    List<Integer> playedPos = new ArrayList<>();
 //Timer timer = new Timer(1000, new ActionListener() {
 //                @Override
@@ -373,9 +375,9 @@ public class Trainer extends javax.swing.JPanel {
                 && (buttons[6].getText() == "O")) {
             oWins(2, 4, 6);
             return true;
-        } else {
+        } 
             return false;
-        }
+        
     }
 
     public boolean checkfordraw() {
@@ -391,7 +393,7 @@ public class Trainer extends javax.swing.JPanel {
                 && (check() == false)) {
 
             itsdraw();
-            
+
             return true;
         }
         return false;
@@ -455,6 +457,24 @@ public class Trainer extends javax.swing.JPanel {
 //            player1_turn = false;
 //            textfield.setText("O turn");
 //        }
+    }
+
+    public boolean boardFull() {
+        int i;
+        int a = 0;
+        for (i = 0; i < 9; i++) {
+            if (buttons[i].getText() != "") {
+                a++;
+//              continue;      
+            }
+            //return true; 
+        }
+        if (a == 9) {
+            System.out.println(a);
+            return true;
+        }
+
+        return false;
     }
 
     private int humanBotMoveWithIndex(JButton[] buttons) {

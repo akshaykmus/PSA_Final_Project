@@ -95,14 +95,13 @@ public class TrainedMenace implements Serializable {
 //    }
     // not working
 
-    public Hashtable<Integer[], Hashtable<Integer, Integer>> checkState(int moveNumber, Hashtable<Integer[], Hashtable<Integer, Integer>> ht, Integer[] state) {
+    public Hashtable<String, Hashtable<Integer, Integer>> checkState(int moveNumber, Hashtable<String, Hashtable<Integer, Integer>> ht, String state) {
 
         // if Key doesnot exist return new new hashTable with all 0 zeros
         if (ht.containsKey(state) == false) {
             System.out.println("Adding a new state on check state!!!");
-            for (int i = 0; i < state.length; i++) {
-                System.out.print(state[i]);
-            }
+            System.out.print(state);
+            
             HashTableFunctions h = new HashTableFunctions();
             Hashtable<Integer, Integer> newHash = h.crateNewHash();
             ht.put(state, newHash);
@@ -114,7 +113,7 @@ public class TrainedMenace implements Serializable {
         return ht;
     }
 
-    public int getMaxValuefromInner(Hashtable<Integer[], Hashtable<Integer, Integer>> ht, Integer[] state, List<Integer> emptySpaces) {
+    public int getMaxValuefromInner(Hashtable<String, Hashtable<Integer, Integer>> ht, String state, List<Integer> emptySpaces) {
         Hashtable<Integer, Integer> innerHash = ht.get(state);
         HashTableFunctions h = new HashTableFunctions();
         return h.getMaxValueFromHashTable(innerHash, emptySpaces);
@@ -123,7 +122,7 @@ public class TrainedMenace implements Serializable {
     public ParentHT menacemove(ParentHT pHT, JButton[] buttons, int move, List<Integer> empty,Integer[] playedPos) {
 //        ParentHT pHT = new ParentHT();
         int key = -1;
-        init(); // read from file
+//        init(); // read from file
 //       pHT.ht1 = readObjectFromFile(1);
 //        pHT.ht2 = readObjectFromFile(2);
 //        pHT.ht3 = readObjectFromFile(3);
@@ -146,14 +145,13 @@ pHT.index=key;
 
     }
 
-    public void verifyHashTables(Hashtable<Integer[], Hashtable<Integer, Integer>> ht) {
-        Set<Integer[]> keys = ht.keySet();
-        for (Integer[] key : keys) {
+    public void verifyHashTables(Hashtable<String, Hashtable<Integer, Integer>> ht) {
+        Set<String> keys = ht.keySet();
+        for (String key : keys) {
             System.out.println();
             System.out.println("KEY= ");
-            for (int j = 0; j < key.length; j++) {
-                System.out.print(key[j]);
-            }
+                System.out.print(key);
+            
             System.out.println();
             Hashtable<Integer, Integer> ht2 = ht.get(key);
             System.out.println("The points given to this state is");
@@ -163,7 +161,7 @@ pHT.index=key;
         }
     }
 
-    public void insertRewards(ParentHT pHT,String s, List<Integer> ranks, List<Integer[]> states) {
+    public void insertRewards(ParentHT pHT,String s, List<Integer> ranks, List<String> states) {
 //        System.out.println(s);
 //        for (int i = 0; i < ranks.size(); i++) {
 //            System.out.println(ranks.get(i));
@@ -182,13 +180,18 @@ pHT.index=key;
 //        pHT.ht4 = readObjectFromFile(4);
         insertPointsToHashTable(1, states.get(0), pHT.ht1, s, ranks.get(0));
         insertPointsToHashTable(2, states.get(1), pHT.ht2, s, ranks.get(1));
-        insertPointsToHashTable(3, states.get(2), pHT.ht3, s, ranks.get(2));
+        if (states.size() >= 3) {
+            System.out.println("HASTABLE 3");
+            insertPointsToHashTable(3, states.get(2), pHT.ht3, s, ranks.get(2));
+            verifyHashTables(pHT.ht3);
+        }
+        
         System.out.println("HASTABLE 1");
         verifyHashTables(pHT.ht1);
         System.out.println("HASTABLE 2");
         verifyHashTables(pHT.ht2);
-        System.out.println("HASTABLE 3");
-        verifyHashTables(pHT.ht3);
+//        System.out.println("HASTABLE 3");
+//        verifyHashTables(pHT.ht3);
         if (states.size() >= 4) {
             System.out.println("HASTABLE 4");
             insertPointsToHashTable(4, states.get(3), pHT.ht4, s, ranks.get(3));
@@ -203,7 +206,7 @@ pHT.index=key;
     }
 
     public void writeObjectToFile(int moveNumber, Score obj) {
-        String filePath = "/Users/dalal/PSA_Tic_tac_toe/PSA_Tic_tac_toe/src/main/java/com/neu/psa/tic/tac/toe/";
+        String filePath = "./src/main/java/com/neu/psa/tic/tac/toe/";
         if (moveNumber == 1) {
             filePath = filePath + "ht1.tmp";
         } else if (moveNumber == 2) {
@@ -228,8 +231,8 @@ pHT.index=key;
 
     }
 
-    public Hashtable<Integer[], Hashtable<Integer, Integer>> readObjectFromFile(int moveNumber) {
-        String filePath = "/Users/dalal/PSA_Tic_tac_toe/PSA_Tic_tac_toe/src/main/java/com/neu/psa/tic/tac/toe/";
+    public Hashtable<String, Hashtable<Integer, Integer>> readObjectFromFile(int moveNumber) {
+        String filePath = "./src/main/java/com/neu/psa/tic/tac/toe/";
 
         if (moveNumber == 1) {
             filePath = filePath + "ht1.tmp";
@@ -249,7 +252,7 @@ pHT.index=key;
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             Score obj = (Score) objectIn.readObject();
             objectIn.close();
-            Hashtable<Integer[], Hashtable<Integer, Integer>> hasht = (Hashtable<Integer[], Hashtable<Integer, Integer>>) convertObjToHashTable(obj);
+            Hashtable<String, Hashtable<Integer, Integer>> hasht = convertObjToHashTable(obj);
             return hasht;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TrainedMenace.class.getName()).log(Level.SEVERE, null, ex);
@@ -264,10 +267,8 @@ pHT.index=key;
     }
 
     //for both insert and update
-    public void insertPointsToHashTable(int moveNumber, Integer[] state, Hashtable<Integer[], Hashtable<Integer, Integer>> ht, String s, Integer rank) {
-        for (int i = 0; i < state.length; i++) {
-            System.out.print(state[i]);
-        }
+    public void insertPointsToHashTable(int moveNumber, String state, Hashtable<String, Hashtable<Integer, Integer>> ht, String s, Integer rank) {
+       
         //System.out.println(state[3]);
 //        if (ht.containsKey(state) == false) {
 //            System.out.println("ADDING A NEW STATE");
@@ -319,11 +320,11 @@ pHT.index=key;
     
     
        // convert obj to HT
-    public Hashtable<Integer[], Hashtable<Integer, Integer>> convertObjToHashTable(Score obj){
-        List<Integer[]> lStates = obj.states;
+    public Hashtable<String, Hashtable<Integer, Integer>> convertObjToHashTable(Score obj){
+        List<String> lStates = obj.states;
         List<Integer[]> lScores = obj.scores;
 
-        Hashtable<Integer[], Hashtable<Integer, Integer>> ht = new Hashtable<>();
+        Hashtable<String, Hashtable<Integer, Integer>> ht = new Hashtable<>();
         // add all the states to hash table
     for(int i=0;i< lStates.size();i++){
     // create a inner new HT
@@ -342,13 +343,13 @@ pHT.index=key;
 
 
     // convert HT to obj
-    public Score convertHTtoObj(Hashtable<Integer[], Hashtable<Integer, Integer>> ht){
+    public Score convertHTtoObj(Hashtable<String, Hashtable<Integer, Integer>> ht){
         Score sc = new Score();
-        List<Integer[]> lStates = new ArrayList<>();
+        List<String> lStates = new ArrayList<>();
         List<Integer[]> lScores =  new ArrayList<>();
 
-        Set<Integer[]> keys = ht.keySet();
-        for(Integer[] key: keys){
+        Set<String> keys = ht.keySet();
+        for(String key: keys){
             lStates.add(key);
             Hashtable<Integer, Integer> ht2 =  ht.get(key);
             Integer[] tempScore = new Integer[9];

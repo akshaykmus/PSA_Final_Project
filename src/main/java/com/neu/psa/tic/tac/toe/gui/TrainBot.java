@@ -144,14 +144,14 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         player1_turn = false;
                         textField.setText("O turn");
                         pHT.playedPos[i] = 1;
-                        Integer[] tempPlayedPos = new Integer[pHT.playedPos.length];
-                       for(int z=0;z<pHT.playedPos.length;z++) tempPlayedPos[z]=pHT.playedPos[z];
+                        String tempPlayedPos = ""; //new Integer[pHT.playedPos.length];
+                       for(int z=0;z<pHT.playedPos.length;z++) tempPlayedPos = tempPlayedPos + String.valueOf(pHT.playedPos[z]);
                          pHT.states.add(tempPlayedPos);
                         check();
                         checkfordraw();
                     }
 //                } else {
-                     if (!boardFull()) {
+                     if (!boardFull()&&!check()&&!checkfordraw()) {
                     TrainedMenace tm = new TrainedMenace();
                     List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
                         
@@ -174,14 +174,14 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
 //                        for(int z=0;z<playedPos.length;z++) tempPlayedPos[z]=playedPos[z];
 //                        states.add(tempPlayedPos);
 
-                        for(int x=0;x<pHT.states.size();x++){
-                            System.out.println("Printing index: "+x);
-                            Integer[] y = pHT.states.get(x);
-                          
-                            System.out.println();
-                            for(int j=0;j<y.length;j++) System.out.print(y[j]);
-                            System.out.println();
-                        }
+//                        for(int x=0;x<pHT.states.size();x++){
+//                            System.out.println("Printing index: "+x);
+//                            Integer[] y = pHT.states.get(x);
+//                          
+//                            System.out.println();
+//                            for(int j=0;j<y.length;j++) System.out.print(y[j]);
+//                            System.out.println();
+//                        }
                         check();
                         checkfordraw();
                     }
@@ -306,7 +306,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
         }
     }
 
-    public void checkfordraw() {
+    public boolean checkfordraw() {
         if ((buttons[0].getText() != "")
                 && (buttons[1].getText() != "")
                 && (buttons[2].getText() != "")
@@ -319,7 +319,10 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                 && (check() == false)) {
 
             itsdraw();
+            return true;
         }
+        return false;
+        
     }
 
     public void xWins(int a, int b, int c) {
