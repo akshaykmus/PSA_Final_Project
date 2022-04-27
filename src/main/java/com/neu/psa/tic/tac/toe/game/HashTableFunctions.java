@@ -33,6 +33,9 @@ public class HashTableFunctions {
     
     public Hashtable<Integer[], Hashtable<Integer, Integer>> createNewHashOfHash() {
         Hashtable<Integer[], Hashtable<Integer, Integer>> newHT = new Hashtable<>();
+        Integer[] arr = {0,0,0,0,0,0,0,0,0};
+        Hashtable<Integer, Integer> hashtab = crateNewHash();
+        newHT.put(arr, hashtab);
         return newHT;
     }
 

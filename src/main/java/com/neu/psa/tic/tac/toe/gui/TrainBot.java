@@ -6,6 +6,7 @@
 package com.neu.psa.tic.tac.toe.gui;
 
 import com.neu.psa.tic.tac.toe.game.EasyMenace;
+import com.neu.psa.tic.tac.toe.game.ParentHT;
 import com.neu.psa.tic.tac.toe.game.TrainedMenace;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -119,13 +120,16 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 
-    int move = 1;
-    Integer[] playedPos = new Integer[9];
-    List<Integer[]> states = new ArrayList<>();
-    List<Integer> ranks = new ArrayList<>();
-
+//        int move = 1;
+//    Integer[] playedPos = new Integer[9];
+//    List<Integer[]> states = new ArrayList<>();
+//    List<Integer> ranks = new ArrayList<>();   
+ ParentHT pHT = new ParentHT();
+ 
+        
     @Override
     public void actionPerformed(ActionEvent e) {
+ 
         for (int i = 0; i < 9; i++) {
             if (e.getSource() == buttons[i]) {
                 if (player1_turn) {
@@ -139,7 +143,10 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         buttons[i].setOpaque(true);
                         player1_turn = false;
                         textField.setText("O turn");
-                        playedPos[i] = 1;
+                        pHT.playedPos[i] = 1;
+                        Integer[] tempPlayedPos = new Integer[pHT.playedPos.length];
+                       for(int z=0;z<pHT.playedPos.length;z++) tempPlayedPos[z]=pHT.playedPos[z];
+                         pHT.states.add(tempPlayedPos);
                         check();
                         checkfordraw();
                     }
@@ -147,7 +154,9 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                      if (!boardFull()) {
                     TrainedMenace tm = new TrainedMenace();
                     List<Integer> emptySpaces = getAllEmptySpacesOnBoard(buttons);
-                    int index = tm.menacemove(buttons, move, emptySpaces, playedPos);
+                        
+                           pHT = tm.menacemove(pHT,buttons, pHT.move, emptySpaces, pHT.playedPos);
+                            int index= pHT.index;
                     if (buttons[index].getText() == "") {
                         buttons[index].setForeground(new Color(0, 0, 255));
                         buttons[index].setText("O");
@@ -158,16 +167,16 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                         buttons[index].setOpaque(true);
                         player1_turn = true;
                         textField.setText("X turn");
-                        move++;
-                        playedPos[index] = -1;
-                        ranks.add(index);
-                        Integer[] tempPlayedPos = new Integer[playedPos.length];
-                        for(int z=0;z<playedPos.length;z++) tempPlayedPos[z]=playedPos[z];
-                        states.add(tempPlayedPos);
+                        pHT.move = pHT.move+1;
+                        pHT.playedPos[index] = -1;
+                        pHT.ranks.add(index);
+//                        Integer[] tempPlayedPos = new Integer[playedPos.length];
+//                        for(int z=0;z<playedPos.length;z++) tempPlayedPos[z]=playedPos[z];
+//                        states.add(tempPlayedPos);
 
-                        for(int x=0;x<states.size();x++){
+                        for(int x=0;x<pHT.states.size();x++){
                             System.out.println("Printing index: "+x);
-                            Integer[] y = states.get(x);
+                            Integer[] y = pHT.states.get(x);
                           
                             System.out.println();
                             for(int j=0;j<y.length;j++) System.out.print(y[j]);
@@ -179,14 +188,14 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                     check();
                     checkfordraw();
                     
-
+                       
                         if (textField.getText().equalsIgnoreCase("X wins")) {
                             System.err.println("X checkpoint reached");
-                            tm.insertRewards("loss", ranks, states);
+                            tm.insertRewards(pHT,"loss", pHT.ranks, pHT.states);
                         }
                         if (textField.getText().equalsIgnoreCase("O wins")) {
                             System.err.println("O checkpoint reached");
-                            tm.insertRewards("win", ranks, states);
+                            tm.insertRewards(pHT,"win", pHT.ranks, pHT.states);
                         }
                     }
                 }
