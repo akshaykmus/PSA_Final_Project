@@ -26,7 +26,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class TrainBot extends javax.swing.JPanel implements ActionListener {
     
-    private static final Logger log = LogManager.getLogger(Application.class);
+    private static final Logger log = LogManager.getLogger(TrainBot.class);
     JButton[] buttons = new JButton[9];
     boolean player1_turn = true;
 
@@ -182,33 +182,30 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
 
                     if (textField.getText().equalsIgnoreCase("X wins")) {
                         System.out.println("X checkpoint reached");
-                        //log.info("Status="+textField.getText().toString());
                         String rankPos ="";
                         for(int j=0; j<pHT.ranks.size(); j++){
                              rankPos = rankPos + " " + String.valueOf(pHT.ranks.get(j));                           
                         }
-                        log.info("Status = Human Wins" +"\nbeta = 3 added to positions "+ rankPos);
+                        log.info("\nStatus = Human Wins" +"\nbeta = 3 added to positions "+ rankPos);
                         tm.insertRewards(pHT, "loss", pHT.ranks, pHT.states);
                     }
                     if (textField.getText().equalsIgnoreCase("O wins")) {
-                        System.out.println("O checkpoint reached");
-                        //log.info("Status = "+textField.getText().toString());
+                        System.out.println("O checkpoint reached");                  
                         String rankPos =" ";
                         for(int j=0; j<pHT.ranks.size(); j++){
                              rankPos = rankPos + " " + String.valueOf(pHT.ranks.get(j));  
                         }
                         System.out.println(rankPos);
-                        log.info("Status = Bot Wins"+" \ngamma = -1 added to positions "+ rankPos);
+                        log.info("\nStatus = Bot Wins"+" \ngamma = -1 added to positions "+ rankPos);
                         tm.insertRewards(pHT, "win", pHT.ranks, pHT.states);
                     }
                     if (textField.getText().equalsIgnoreCase("Its a Draw")) {
                         System.out.println("Draw checkpoint reached");
-                        //log.info("Status = "+textField.getText().toString());
                         String rankPos ="";
                         for(int j=0; j<pHT.ranks.size(); j++){
                              rankPos = rankPos + " " + String.valueOf(pHT.ranks.get(j));                           
                         }
-                        log.info("Status = Its a Draw"+"\ndelta = 2 added to positions "+ rankPos);
+                        log.info("\nStatus = Its a Draw"+"\ndelta = 2 added to positions "+ rankPos);
                         tm.insertRewards(pHT, "draw", pHT.ranks, pHT.states);
                     }
                 }
