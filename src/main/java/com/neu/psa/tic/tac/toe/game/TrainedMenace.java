@@ -36,6 +36,7 @@ public class TrainedMenace implements Serializable {
 //
 //    }
     
+    // Returns if state exists else it will create a new state in the HashTable
     public Hashtable<String, Hashtable<Integer, Integer>> checkState(int moveNumber, Hashtable<String, Hashtable<Integer, Integer>> ht, String state) {
 
         // if Key doesnot exist return new new hashTable with all 0 zeros
@@ -54,12 +55,14 @@ public class TrainedMenace implements Serializable {
         return ht;
     }
 
+    // Gets the index of the max value from given HashTable
     public int getMaxValuefromInner(Hashtable<String, Hashtable<Integer, Integer>> ht, String state, List<Integer> emptySpaces) {
         Hashtable<Integer, Integer> innerHash = ht.get(state);
         HashTableFunctions h = new HashTableFunctions();
         return h.getMaxValueFromHashTable(innerHash, emptySpaces);
     }
 
+    // rerurns the next move of the Menace; It will return  index/move,ranks and playedPositions
     public ParentHT menacemove(ParentHT pHT, JButton[] buttons, int move, List<Integer> empty, Integer[] playedPos) {
         int key = -1;
 //         init(); // read from file
@@ -82,6 +85,7 @@ public class TrainedMenace implements Serializable {
 
     }
 
+    // prints the Keys and Values of HashTable
     public void verifyHashTables(Hashtable<String, Hashtable<Integer, Integer>> ht) {
         Set<String> keys = ht.keySet();
         for (String key : keys) {
@@ -98,6 +102,7 @@ public class TrainedMenace implements Serializable {
         }
     }
 
+    // insert points to the HashTable based on Win/Loss at the end of a single game.
     public void insertRewards(ParentHT pHT, String s, List<Integer> ranks, List<String> states) {
 
         insertPointsToHashTable(1, states.get(0), pHT.ht1, s, ranks.get(0));
@@ -181,7 +186,7 @@ public class TrainedMenace implements Serializable {
         return null;
     }
 
-    //for both insert and update
+    // inserts points to HashTable
     public void insertPointsToHashTable(int moveNumber, String state, Hashtable<String, Hashtable<Integer, Integer>> ht, String s, Integer rank) {
         if (s == "win") {
             Hashtable<Integer, Integer> ht123 = ht.get(state);

@@ -110,6 +110,7 @@ public class Trainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldActionPerformed
 
+    // This method allows two bots(Menace and Optimal) to play against each other 
     private void markPosition() {
         TrainedMenace tm = new TrainedMenace();
         System.out.println("inside mark positon");
@@ -250,6 +251,7 @@ public class Trainer extends javax.swing.JPanel {
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 
+    // checks for Win/Loss
     public boolean check() {
         //check X win conditions
         if ((buttons[0].getText() == "X")
@@ -353,6 +355,7 @@ public class Trainer extends javax.swing.JPanel {
 
     }
 
+    // checks for draw
     public boolean checkfordraw() {
         if ((buttons[0].getText() != "")
                 && (buttons[1].getText() != "")
@@ -372,6 +375,7 @@ public class Trainer extends javax.swing.JPanel {
         return false;
     }
 
+    // action performed when X wins
     public void xWins(int a, int b, int c) {
         buttons[a].setBackground(Color.GREEN);
         buttons[b].setBackground(Color.GREEN);
@@ -383,6 +387,7 @@ public class Trainer extends javax.swing.JPanel {
         textField.setText("X wins");
     }
 
+    // action performed when O wins
     public void oWins(int a, int b, int c) {
         buttons[a].setBackground(Color.GREEN);
         buttons[b].setBackground(Color.GREEN);
@@ -403,6 +408,7 @@ public class Trainer extends javax.swing.JPanel {
         textField.setText("Its a Draw");
     }
 
+    // get all emptySpaces on the board currently
     public List<Integer> getAllEmptySpacesOnBoard(JButton[] buttons) {
         List<Integer> emptySpaces = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
@@ -413,6 +419,7 @@ public class Trainer extends javax.swing.JPanel {
         return emptySpaces;
     }
     
+    // checks if board is Full
     public boolean boardFull() {
         int i;
         int a = 0;

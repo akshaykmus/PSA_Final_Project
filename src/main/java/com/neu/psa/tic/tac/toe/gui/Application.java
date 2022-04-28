@@ -20,13 +20,10 @@ import org.apache.logging.log4j.Level;
  */
 public class Application extends javax.swing.JFrame {
     
-    private static final Logger log = LogManager.getLogger(Application.class);
-    
     /**
      * Creates new form Applications
      */
     public Application() {
-        log.info("inside application log");
         initComponents();
     }
 
@@ -227,7 +224,7 @@ public class Application extends javax.swing.JFrame {
 
     private void btnTrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrainActionPerformed
         // TODO add your handling code here:
-            for(int i =0;i<10000;i++){
+            for(int i =0;i<10;i++){
         Trainer train = new Trainer();
         splitPane.setRightComponent(train);  
         }
