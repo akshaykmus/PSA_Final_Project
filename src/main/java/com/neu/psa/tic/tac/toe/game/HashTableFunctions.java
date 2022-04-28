@@ -57,26 +57,6 @@ public class HashTableFunctions {
                 key = emptySpaces.get(i);
             }
         }
-        
-        
         return key;
-    }
-
-    public void writeToExcel(int moveNumber, Hashtable<Integer, Integer> ht) {
-        for (int i = 0; i < 9; i++) {
-            System.out.println(ht.get(i).intValue());
-            Excelutil.writeData(moveNumber, i+1, ht.get(i).intValue());
-
-        }
-    }
-
-    public Hashtable<Integer, Integer> readFromExcel(Hashtable<Integer, Integer> ht, int moveNumber) {
-        for (int i = 0; i < 9; i++) {
-            
-            int d = (int) Excelutil.getData(moveNumber, i + 1);
-
-            ht.put(i, d);
-        }
-        return ht;
     }
 }

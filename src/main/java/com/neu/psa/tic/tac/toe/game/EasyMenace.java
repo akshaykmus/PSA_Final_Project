@@ -17,16 +17,12 @@ public class EasyMenace {
         
         Random ran = new Random();
         // check if place is empty;if true then return index of empty space.
-        // TODO: check for Draw
+        
         int a = ran.nextInt(9);
         while(buttons[a].getText()!=""){
             
               a = ran.nextInt(9);
         }
-        return a; 
-   
-       
-        
-    }
-    
+        return a;  
+    } 
 }

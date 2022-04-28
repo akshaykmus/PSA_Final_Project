@@ -30,9 +30,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
     JButton[] buttons = new JButton[9];
     boolean player1_turn = true;
 
-    /**
-     * Creates new form NaiveBotPanel
-     */
+    
     public TrainBot() {
         initComponents();
         createGridButtons();
@@ -196,7 +194,7 @@ public class TrainBot extends javax.swing.JPanel implements ActionListener {
                              rankPos = rankPos + " " + String.valueOf(pHT.ranks.get(j));  
                         }
                         System.out.println(rankPos);
-                        log.info("\nStatus = Bot Wins"+" \ngamma = -1 added to positions "+ rankPos);
+                        log.info("\nStatus = Bot Wins"+"\ngamma = -1 added to positions "+ rankPos);
                         tm.insertRewards(pHT, "win", pHT.ranks, pHT.states);
                     }
                     if (textField.getText().equalsIgnoreCase("Its a Draw")) {

@@ -132,25 +132,17 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
                         buttons[i].setBorderPainted(false);
                         buttons[i].setOpaque(true);
                         player1_turn = false;
-                        //System.out.println(player1_turn);
                         textField.setText("O turn");
-                        //System.out.println(i);
+                       
                         check();
                         checkfordraw();
                     }
-//                } else {
-                    //System.out.println(index);
 
-//                    for (int j = 0; j < 9; j++) {
-//                        if(buttons[j].getText()!=""){
-//                            
-//                        }
-//                    }
                     if (!boardFull()) {
                         System.out.println(boardFull());
                         EasyMenace eM = new EasyMenace();
                         int index = eM.easyMove(buttons);
-                        //System.out.println(index);
+                        
                         check();
                         checkfordraw();
                         if (buttons[index].getText() == "") {
@@ -336,9 +328,9 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
         for (i = 0; i < 9; i++) {
             if (buttons[i].getText() != "") {
                 a++;
-//              continue;      
+  
             }
-            //return true; 
+            
         }
         if (a == 9) {
             System.out.println(a);
@@ -357,12 +349,5 @@ public class NaiveBot extends javax.swing.JPanel implements ActionListener {
             e.printStackTrace();
         }
 
-//        if (random.nextInt(2) == 0) {
-//            player1_turn = true;
-//            textfield.setText("X turn");
-//        } else {
-//            player1_turn = false;
-//            textfield.setText("O turn");
-//        }
     }
 }
