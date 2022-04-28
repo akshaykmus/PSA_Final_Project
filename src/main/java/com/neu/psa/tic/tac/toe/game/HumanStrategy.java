@@ -208,40 +208,40 @@ public class HumanStrategy {
         return list;
     }
 
-    public static void main(String[] args){
-        System.out.println("Lets play Menace!");
-        HumanStrategy h = new HumanStrategy();
-        Integer[] board = h.getNewBoard();
-
-        while(true){
-
-
-            h.realPlayerMove(board);
-            if(h.isWinner(board, 0)==true){
-                System.out.println("Real player Won!");
-                return;
-            }
-            if(h.isBoardFull(board)==true){
-                System.out.println("TIE game!");
-                return;
-            }
-            h.printBoard(board);
-
-
-
-            System.out.println("Human bot has played:");
-            h.humanBotMove(board);
-            if(h.isWinner(board, 1)==true){
-                System.out.println("Human bot Won!");
-                return;
-            }
-            if(h.isBoardFull(board)==true){
-                System.out.println("TIE game!");
-                return;
-            }
-            h.printBoard(board);
-        }
-    }
+//    public static void main(String[] args){
+//        System.out.println("Lets play Menace!");
+//        HumanStrategy h = new HumanStrategy();
+//        Integer[] board = h.getNewBoard();
+//
+//        while(true){
+//
+//
+//            h.realPlayerMove(board);
+//            if(h.isWinner(board, 0)==true){
+//                System.out.println("Real player Won!");
+//                return;
+//            }
+//            if(h.isBoardFull(board)==true){
+//                System.out.println("TIE game!");
+//                return;
+//            }
+//            h.printBoard(board);
+//
+//
+//
+//            System.out.println("Human bot has played:");
+//            h.humanBotMove(board);
+//            if(h.isWinner(board, 1)==true){
+//                System.out.println("Human bot Won!");
+//                return;
+//            }
+//            if(h.isBoardFull(board)==true){
+//                System.out.println("TIE game!");
+//                return;
+//            }
+//            h.printBoard(board);
+//        }
+//    }
     
     
     public Integer[] convertGuiBoardToInts(JButton[] buttons){
