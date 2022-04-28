@@ -41,29 +41,18 @@ public class TrainedMenaceTest {
     }
 
     /**
-     * Test of init method, of class TrainedMenace.
-     */
-  
-
-    /**
      * Test of checkState method, of class TrainedMenace.
      */
     @Test    public void testCheckState() {
         System.out.println("checkState");
         int moveNumber = 0;
         Hashtable<String, Hashtable<Integer, Integer>> ht = new Hashtable<>();
-//        String state = "";
         TrainedMenace instance = new TrainedMenace();
-//        Hashtable<String, Hashtable<Integer, Integer>> expResult = null;
-//        Hashtable<String, Hashtable<Integer, Integer>> result = instance.checkState(moveNumber, ht, state);
-//        assertEquals(expResult, result);
-       
         Hashtable<String, Hashtable<Integer, Integer>> expResultB = new Hashtable<>();
         String s2 = "111111111";
         String s3 = "111111110";
       Hashtable<String, Hashtable<Integer, Integer>> resultB =  instance.checkState(1, ht, s2);
       HashTableFunctions h = new HashTableFunctions();
-              
      Hashtable<Integer, Integer> value = h.crateNewHash();
       expResultB.put(s2, value);
       assertEquals(resultB,expResultB);
@@ -74,10 +63,7 @@ public class TrainedMenaceTest {
 assertEquals(resultB.keySet().size(),2);
     }
 
-//    /**
-//     * Test of getMaxValuefromInner method, of class TrainedMenace.
-//     */
-    
+
     @Test
     public void testGetMaxValuefromInner() {
         System.out.println("getMaxValuefromInner");
@@ -97,9 +83,9 @@ ht.put(state, value);
         assertEquals(expResult, result);
     }
 
-//    /**
-//     * Test of menacemove method, of class TrainedMenace.
-//     */
+    /**
+     * Test of menacemove method, of class TrainedMenace.
+     */
     @Test
     public void testMenacemove() {
         System.out.println("menacemove");
