@@ -227,10 +227,10 @@ public class Application extends javax.swing.JFrame {
 
     private void btnTrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrainActionPerformed
         // TODO add your handling code here:
-        //for(int i =0;i<20;i++){
+            for(int i =0;i<10000;i++){
         Trainer train = new Trainer();
         splitPane.setRightComponent(train);  
-        //}
+        }
     }//GEN-LAST:event_btnTrainActionPerformed
 
     private void textFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldActionPerformed

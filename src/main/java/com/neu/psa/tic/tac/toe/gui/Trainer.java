@@ -31,10 +31,6 @@ public class Trainer extends javax.swing.JPanel {
     JButton[] buttons = new JButton[9];
     boolean player1_turn = true;
     int i = 0;
-
-    /**
-     * Creates new form NaiveBotPanel
-     */
     ParentHT pHT = new ParentHT();
 
     public Trainer() {
@@ -114,9 +110,6 @@ public class Trainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldActionPerformed
 
-//     Integer[] playedPos = new Integer[9];
-//    List<Integer[]> states = new ArrayList<>();
-//    List<Integer> ranks = new ArrayList<>();
     private void markPosition() {
         TrainedMenace tm = new TrainedMenace();
         System.out.println("inside mark positon");
@@ -125,7 +118,7 @@ public class Trainer extends javax.swing.JPanel {
             HumanStrategy hs = new HumanStrategy();
             int index1 = 0;
             List<Integer> emptySpaces2 = getAllEmptySpacesOnBoard(buttons);
-            if (pHT.move == 1 || pHT.move == 3) {
+            if (pHT.move == 1 || pHT.move == 2||pHT.move == 4) {
                 //random
                 EasyMenace eM = new EasyMenace();
                 index1 = eM.easyMove(buttons);
@@ -203,7 +196,7 @@ public class Trainer extends javax.swing.JPanel {
                     for (int j = 0; j < pHT.ranks.size(); j++) {
                         rankPos = rankPos + " " + String.valueOf(pHT.ranks.get(j));
                     }
-                    log.info("\nStatus = Human Wins" + "\nbeta = 3 added to positions " + rankPos);
+                    log.info("\nStatus = Human Wins" + "\nProbability=0.85" + " beta = 3 added to positions " + rankPos);
                     tm.insertRewards(pHT, "loss", pHT.ranks, pHT.states);
                     return;
 
@@ -218,7 +211,7 @@ public class Trainer extends javax.swing.JPanel {
                         rankPos = rankPos + " " + String.valueOf(pHT.ranks.get(j));
                     }
                     System.out.println(rankPos);
-                    log.info("\nStatus = Bot Wins" + " \ngamma = -1 added to positions " + rankPos);
+                    log.info("\nStatus = Bot Wins" + "\nProbability=0.85" + "  gamma = -1 added to positions " + rankPos);
                     tm.insertRewards(pHT, "win", pHT.ranks, pHT.states);
                     return;
                 }
@@ -231,7 +224,7 @@ public class Trainer extends javax.swing.JPanel {
                     for (int j = 0; j < pHT.ranks.size(); j++) {
                         rankPos = rankPos + " " + String.valueOf(pHT.ranks.get(j));
                     }
-                    log.info("\nStatus = Its a Draw" + "\ndelta = 2 added to positions " + rankPos);
+                    log.info("\nStatus = Its a Draw" + "\nProbability=0.85" + " delta = 2 added to positions " + rankPos);
                     tm.insertRewards(pHT, "draw", pHT.ranks, pHT.states);
                     return;
                 }
@@ -419,17 +412,7 @@ public class Trainer extends javax.swing.JPanel {
         }
         return emptySpaces;
     }
-
-    public void firstTurn() {
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
+    
     public boolean boardFull() {
         int i;
         int a = 0;
