@@ -26,7 +26,7 @@ git clone git@github.com:popatvidhi/PSA_Final_Project.git
 2. Compile,Build the Project <br>
 3. <b>Run</b> <i>src/main/java/com/neu/psa/tic/tac/toe/gui/Application.java</i> <br>
 
-# Plyaing the game
+# Playing the game
  - Click on Easy Button to play with untrained Menace
  - Click on Hard Button to play with the partially trained Menace
  - Click on Train Button to train the Menace.
